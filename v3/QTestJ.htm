@@ -1,0 +1,553 @@
+<html>
+<head>
+<meta name="Generator" content="Microsoft Visual Studio 6.0">
+<meta name="Copyright" content="Copyright © 2001 Roger Deetz">
+<title>RogCorp QUno Engine Test (JScript)</title>
+
+<link rel="stylesheet" href="QTest.css" type="text/css">
+
+<script language="JScript">
+var UnoNoColor = 0;
+var UnoRed = 1;
+var UnoBlue = 2;
+var UnoYellow = 3;
+var UnoGreen = 4;
+
+var UnoNoValue = -6;
+var UnoWildDrawFour = -5;
+var UnoWild = -4;
+var UnoDrawTwo = -3;
+var UnoSkip = -2;
+var UnoReverse = -1;
+var UnoZero = 0;
+var UnoOne = 1;
+var UnoTwo = 2;
+var UnoThree = 3;
+var UnoFour = 4;
+var UnoFive = 5;
+var UnoSix = 6;
+var UnoSeven = 7;
+var UnoEight = 8;
+var UnoNine = 9;
+
+var UnoComputer = 0;
+var UnoHuman = 1;
+
+var m_lPlayerIndex;
+
+function Initialize() {
+    m_Game.Title = "My New Web Game";
+    
+    m_Game.CreatePlayer("Roger", UnoHuman);
+    m_Game.CreatePlayer("Nadine", UnoHuman);
+    m_Game.CreatePlayer("Livy", UnoHuman);
+    
+    for (var i = 0; i < m_Game.Players.Count; i++) {
+        lblPlayer(i).innerText = PlayerToString(m_Game.Players.Item(i));
+    }
+    
+    m_Game.Start();
+    
+    RefreshDeck();
+    RefreshHands();
+    
+    return;
+}
+
+function Terminate() {
+    m_Game.Stop();
+    
+    return;
+}
+
+function Draw() {
+    m_Game.Players.Item(m_lPlayerIndex).Draw();
+    
+    RefreshHands();
+    RefreshDeck();
+    
+    return;
+}
+
+function Play() {
+    var lCard = lstHand(m_lPlayerIndex).selectedIndex;
+    
+    var pCard = m_Game.Players.Item(m_lPlayerIndex).Hand(lCard);
+
+    if (!pCard) {
+        return;
+    }
+
+    var bPlayed = m_Game.Players.Item(m_lPlayerIndex).Play(lCard);
+    
+    if (bPlayed) {
+        RefreshHands();
+        RefreshDeck();
+    } else {
+        lblCantPlay.style.visibility = "visible";
+    }
+    
+    return;
+}
+
+function Pass() {
+    var bPassed = m_Game.Players.Item(m_lPlayerIndex).Pass();
+    
+    if (bPassed) {
+        RefreshHands();
+        RefreshDeck();
+    } else {
+        lblCantPass.style.visibility = "visible";
+    }
+    
+    return;
+}
+
+function HandClick() {
+    lblCantPlay.style.visibility = "hidden";
+    lblCantPass.style.visibility = "hidden";
+    
+    return;
+}
+
+function PlayAfterDrawClick() {
+    if (chkPlayAfterDraw.checked) {
+        m_Game.PlayAfterDraw = true;
+    } else {
+        m_Game.PlayAfterDraw = false;
+    }
+    
+    return;
+}
+
+function RefreshDeck() {
+    lblGameTitle.innerText = m_Game.Title;
+
+    if (m_Game.PlayAfterDraw) {
+        chkPlayAfterDraw.checked = true;
+    } else {
+        chkPlayAfterDraw.checked = false;
+    }
+    
+    lblDrawStackCount.innerText = m_Game.Deck.DrawCount;
+    lblPlayedStackCount.innerText = m_Game.Deck.PlayedCount;
+    lblActiveCard.innerText = CardToString(m_Game.Deck.ActiveCard);
+    lblWildColor.innerText = CardColorToString(m_Game.WildColor);
+    
+    lblCantPlay.style.visibility = "hidden";
+    lblCantPass.style.visibility = "hidden";
+    
+    return;
+}
+
+function RefreshHands() {
+    for (var i = 0; i < m_Game.Players.Count; i++) {
+        for (var j = 0; j < lstHand(i).options.length; j++) {
+            lstHand(i).options.remove(0);
+        }
+        
+        /*
+        var oEnum = new Enumerator(m_Game.Players.Item(i).Hand);
+        oEnum.moveFirst();
+        
+        while (!oEnum.atEnd()) {
+            var c = oEnum.item();
+            
+            var oEl = document.createElement("OPTION");
+            oEl.text = CardToString(c);
+            
+            lstHand(i).options.add(oEl);
+            
+            oEnum.moveNext();
+        }
+        */
+        
+        for (var k = 0; k < m_Game.Players.Item(i).Hand.Count; k++) {
+            var c = m_Game.Players.Item(i).Hand.Item(k);
+            
+            var oEl = document.createElement("OPTION");
+            oEl.text = CardToString(c);
+            
+            lstHand(i).options.add(oEl);
+        }
+    }
+    
+    return;
+}
+
+function ChangePlayerTurn(lIndex) {
+    m_lPlayerIndex = lIndex;
+    
+    for (var i = 0; i < m_Game.Players.Count; i++) {
+        lblPlayer(i).style.color = "black";
+        optPlayer(i).checked = false;
+        lstHand(i).disabled = true;
+    }
+    
+    lblPlayer(m_lPlayerIndex).style.color = "red";
+    optPlayer(m_lPlayerIndex).checked = true;
+    
+    with (lstHand(m_lPlayerIndex)) {
+        disabled = false;
+        
+        if (options.length > 0) {
+            selectedIndex = 0;
+        }
+    }
+    
+    lblCantPlay.style.visibility = "hidden";
+    lblCantPass.style.visibility = "hidden";
+    
+    return;
+}
+
+function PlayerToString(oPlayer) {
+    var s = "";
+    
+    if (!oPlayer) {
+        return s;
+    }
+    
+    s = oPlayer.Name;
+    
+    switch (oPlayer.Type) {
+        case UnoComputer:
+            s = (s + " (Computer)");
+            break;
+        case UnoHuman:
+            s = (s + " (Human)");
+            break;
+    }
+    
+    return s;
+}
+
+function CardToString(oCard) {
+    var s = "";
+    
+    if (!oCard) {
+        return s;
+    }
+    
+    if ((oCard.Color == UnoNoColor) && (oCard.Value == UnoNoValue)) {
+        s = "<Not Initialized>";
+        return s;
+    }
+    
+    s = CardColorToString(oCard.Color);
+    s = (s + " " + CardValueToString(oCard.Value));
+    
+    return s;
+}
+
+function CardColorToString(eColor) {
+    var s = "";
+    
+    switch (eColor) {
+        case UnoNoColor:
+            s = "No Color";
+            break;
+        case UnoRed:
+            s = "Red";
+            break;
+        case UnoBlue:
+            s = "Blue";
+            break;
+        case UnoYellow:
+            s = "Yellow";
+            break;
+        case UnoGreen:
+            s = "Green";
+            break;
+        default:
+            s = "<Invalid Color>";
+            break;
+    }
+    
+    return s;
+}
+
+function CardValueToString(eValue) {
+    var s = "";
+    
+    switch (eValue) {
+        case UnoNoValue:
+            s = "No Value";
+            break;
+        case UnoZero:
+            s = "0";
+            break;
+        case UnoOne:
+            s = "1";
+            break;
+        case UnoTwo:
+            s = "2";
+            break;
+        case UnoThree:
+            s = "3";
+            break;
+        case UnoFour:
+            s = "4";
+            break;
+        case UnoFive:
+            s = "5";
+            break;
+        case UnoSix:
+            s = "6";
+            break;
+        case UnoSeven:
+            s = "7";
+            break;
+        case UnoEight:
+            s = "8";
+            break;
+        case UnoNine:
+            s = "9";
+            break;
+        case UnoDrawTwo:
+            s = "Draw Two";
+            break;
+        case UnoSkip:
+            s = "Skip";
+            break;
+        case UnoReverse:
+            s = "Reverse";
+            break;
+        case UnoWild:
+            s = "Wild";
+            break;
+        case UnoWildDrawFour:
+            s = "Wild Draw Four";
+            break;
+        default:
+            s = "<Invalid Value>";
+            break;
+    }
+    
+    return s;
+}
+
+function PromptForWildColor() {
+    // TODO: fix this
+    return UnoRed;
+}
+</script>
+
+<object id="m_Game" classid="clsid:46AFD017-CEF0-47B5-B2F2-0477AE5D0C0C">
+    <param name="HandSize" value="5">
+    <param name="PlayAfterDraw" value="True">
+</object>
+
+<script for="m_Game" event="PlayerTurn(lPlayer)" language="JScript">
+    var pPlayer = m_Game.Players(lPlayer);
+    
+    if (!pPlayer) {
+        return;
+    }
+
+    ChangePlayerTurn(lPlayer);
+
+</script>
+
+<script for="m_Game" event="PlayerChooseWildColor(lPlayer, peColor)" language="JScript">
+    var pPlayer = m_Game.Players(lPlayer);
+    
+    if (!pPlayer) {
+        return;
+    }
+    
+    peColor = PromptForWildColor();
+
+</script>
+
+<script for="m_Game" event="PlayerUno(lPlayer)" language="JScript">
+    var pPlayer = m_Game.Players(lPlayer);
+    
+    if (!pPlayer) {
+        return;
+    }
+    
+    var s = (PlayerToString(pPlayer) + " has UNO!");
+    
+    lblPlayerUno.innerText = s;
+    lblPlayerUno.style.visibility = "visible";
+
+</script>
+
+<script for="m_Game" event="PlayerOut(lPlayer, bKeepPlaying" language="JScript">
+    var pPlayer = m_Game.Players(lPlayer);
+    
+    if (!pPlayer) {
+        return;
+    }
+    
+    var s = (PlayerToString(pPlayer) + " is out!");
+    
+    lblPlayerOut.innerText = s;
+    lblPlayerOut.style.visibility = "visible";
+    
+    var nResult = confirm("Do you want to keep playing?");
+    
+    if (nResult) {
+        pbKeepPlaying = true;
+    } else {
+        pbKeepPlaying = false;
+    }
+
+</script>
+
+<script for="m_Game" event="GameOver()" language="JScript">
+    lblGameOver.style.visibility = "visible";
+    
+</script>
+
+</head>
+<body class="testpage" onload="Initialize();" onunload="Terminate();">
+
+<table width="100%">
+    <tr>
+        <td>
+            RogCorp QUno Engine Test (JScript)
+        </td>
+        <td>
+            <ul>
+                <li><a href="QTest.htm" class="stdlink">Home</a></li>
+                <li><a href="QTestVB.htm" class="stdlink">VBScript Edition</a></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <span id="lblGameTitle" class="boldtext">&lt;Game&gt;</span>
+        </td>
+        <td>
+            <input id="chkPlayAfterDraw" type="checkbox" onclick="PlayAfterDrawClick();">
+            <label for="chkPlayAfterDraw">Play After Draw</label>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        Draw Count
+                    </td>
+                    <td>
+                        <span id="lblDrawStackCount" class="bluetext">0</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Played Count
+                    </td>
+                    <td>
+                        <span id="lblPlayedStackCount" class="bluetext">0</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Active Card
+                    </td>
+                    <td>
+                        <span id="lblActiveCard" class="bluetext">&lt;No Active Card&gt;</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Wild Color
+                    </td>
+                    <td>
+                        <span id="lblWildColor" class="bluetext">&lt;No Wild Color&gt;</span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <span id="lblGameOver" class="greentext" style="visibility: hidden;">Game Over!</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="lblPlayerOut" class="greentext" style="visibility: hidden;">&lt;Player&gt; is out!</span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <span id="lblCantPlay" class="redtext" style="visibility: hidden;">You can't play that card!</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span id="lblCantPass" class="redtext" style="visibility: hidden;">You can't pass!</span>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <input id="optPlayer" name="optPlayers" type="radio">
+            <label id="lblPlayer" for="optPlayer"><label>
+        </td>
+        <td>
+            <input id="optPlayer" name="optPlayers" type="radio">
+            <label id="lblPlayer" for="optPlayer"><label>
+        </td>
+        <td>
+            <input id="optPlayer" name="optPlayers" type="radio">
+            <label id="lblPlayer" for="optPlayer"><label>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select id="lstHand" size="7" style="width: 150px;" onclick="HandClick();"></select>
+        </td>
+        <td>
+            <select id="lstHand" size="7" style="width: 150px;" onclick="HandClick();"></select>
+        </td>
+        <td>
+            <select id="lstHand" size="7" style="width: 150px;" onclick="HandClick();"></select>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <span id="lblPlayerUno" style="visibility: hidden;">&lt;Player&gt; has UNO!</span>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <button id="cmdDraw" class="stdbutton" onclick="Draw();">Draw</button>
+                    </td>
+                    <td>
+                        <button id="cmdPlay" class="stdbutton" onclick="Play();">Play</button>
+                    </td>
+                    <td>
+                        <button id="cmdPass" class="stdbutton" onclick="Pass();">Pass</button>
+                    </td>
+                </tr>
+            </table>
+        <td>
+    </tr>
+</table>
+
+</body>
+</html>

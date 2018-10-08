@@ -1,0 +1,62 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QControl", "QControl\QControl.vcproj", "{CE736562-D457-4EE9-9B88-F3C4CB8E8F87}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{8AD56F88-E562-40B5-9514-091022255319} = {8AD56F88-E562-40B5-9514-091022255319}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QEngine", "QEngine\QEngine.vcproj", "{8AD56F88-E562-40B5-9514-091022255319}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QUno", "QUno.vcproj", "{B8216B47-BC65-4C73-92BC-87DDEE0A0F9F}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{CE736562-D457-4EE9-9B88-F3C4CB8E8F87} = {CE736562-D457-4EE9-9B88-F3C4CB8E8F87}
+		{8AD56F88-E562-40B5-9514-091022255319} = {8AD56F88-E562-40B5-9514-091022255319}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 4
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = QControl\\QControl.vcproj
+		SccLocalPath1 = .
+		SccProjectFilePathRelativizedFromConnection1 = QControl\\
+		SccProjectUniqueName2 = QEngine\\QEngine.vcproj
+		SccLocalPath2 = .
+		SccProjectFilePathRelativizedFromConnection2 = QEngine\\
+		SccProjectUniqueName3 = QUno.vcproj
+		SccLocalPath3 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE736562-D457-4EE9-9B88-F3C4CB8E8F87}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CE736562-D457-4EE9-9B88-F3C4CB8E8F87}.Debug|Win32.Build.0 = Debug|Win32
+		{CE736562-D457-4EE9-9B88-F3C4CB8E8F87}.Release|Win32.ActiveCfg = Release|Win32
+		{CE736562-D457-4EE9-9B88-F3C4CB8E8F87}.Release|Win32.Build.0 = Release|Win32
+		{8AD56F88-E562-40B5-9514-091022255319}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8AD56F88-E562-40B5-9514-091022255319}.Debug|Win32.Build.0 = Debug|Win32
+		{8AD56F88-E562-40B5-9514-091022255319}.Release|Win32.ActiveCfg = Release|Win32
+		{8AD56F88-E562-40B5-9514-091022255319}.Release|Win32.Build.0 = Release|Win32
+		{B8216B47-BC65-4C73-92BC-87DDEE0A0F9F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B8216B47-BC65-4C73-92BC-87DDEE0A0F9F}.Debug|Win32.Build.0 = Debug|Win32
+		{B8216B47-BC65-4C73-92BC-87DDEE0A0F9F}.Release|Win32.ActiveCfg = Release|Win32
+		{B8216B47-BC65-4C73-92BC-87DDEE0A0F9F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

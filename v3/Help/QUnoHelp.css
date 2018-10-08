@@ -1,0 +1,71 @@
+/*******************************************************************/
+/*                                                                 */
+/* QUnoHelp.css - global stylesheet for                            */
+/*                RogCorp QUno 3.0 Help                            */
+/*                                                                 */
+/* Copyright © 2000 Roger Deetz                                    */
+/*                                                                 */
+
+BODY, P, A, TD, LI {
+    font-family: 'Verdana', 'Arial', sans-serif;
+    font-size: 8pt;
+    color: black;
+}
+
+INPUT, BUTTON, SELECT, LABEL, TEXTAREA, OBJECT {
+    font-family: 'Tahoma', 'Arial', 'sans-serif';
+    font-size: 8pt;
+    color: black;
+}
+
+.helppage {
+    background-color: white;
+}
+
+.pagetitle {
+    font-family: 'Trebuchet MS', 'Verdana', 'Arial', sans-serif;
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+.subpagetitle {
+    font-family: 'Trebuchet MS', 'Verdana', 'Arial', sans-serif;
+    font-size: 14pt;
+}
+
+.stdlink {
+    color: black;
+}
+
+A.stdlink:hover {
+    color: red;
+}
+
+.stdcell {
+    text-align: left;
+    vertical-align: top;
+}
+
+.iconcell {
+    width: 32px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.smalliconcell {
+    width: 16px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    border: none;
+}
+
+.smallicon {
+    width: 16px;
+    height: 16px;
+    border: none;
+}

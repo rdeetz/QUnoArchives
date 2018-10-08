@@ -1,0 +1,8 @@
+/////////////////////////////////////////////////////////////////////
+//
+// QUnoHelp.js - global script functions for 
+//               RogCorp QUno 3.0 Help
+//
+// Copyright © 2001 Roger Deetz
+//
+

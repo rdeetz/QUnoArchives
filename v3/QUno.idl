@@ -1,0 +1,21 @@
+/////////////////////////////////////////////////////////////////////
+//
+// QUno.idl - interface definitions for the 
+//            RogCorp QUno 3.0 user interface
+//
+// Copyright © 2000-2001 Roger Deetz
+//
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(24C98DD3-4CEB-4EB9-9E32-74560F0998F3),
+    version(3.0),
+    helpstring("RogCorp QUno 3.0 Type Library")
+]
+library QUnoLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+};

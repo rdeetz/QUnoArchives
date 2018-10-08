@@ -1,0 +1,408 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\quno.rc2""  // non-App Studio edited resources\r\n"
+    "\r\n"
+    "#include ""afxres.rc""  \t// Standard components\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\quno.ico"
+IDI_HINT                ICON    DISCARDABLE     "res\\hint.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Game"
+    BEGIN
+        MENUITEM "&New\tF2",                    ID_GAME_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "&Draw\tCtrl+D",               ID_GAME_DRAW
+        MENUITEM "&Force Play\tF5",             ID_GAME_FORCE
+        MENUITEM SEPARATOR
+        MENUITEM "&Options...",                 ID_GAME_OPTIONS
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Contents\tF1",               ID_HELP_CONTENTS
+        MENUITEM "&Quick Hint\tCtrl+Q",         ID_HELP_HINT
+        MENUITEM SEPARATOR
+        MENUITEM "&About...",                   ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "D",            ID_GAME_DRAW,           VIRTKEY, CONTROL, NOINVERT
+    "Q",            ID_HELP_HINT,           VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          ID_HELP_CONTENTS,       VIRTKEY, NOINVERT
+    VK_F2,          ID_GAME_NEW,            VIRTKEY, NOINVERT
+    VK_F5,          ID_GAME_FORCE,          VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  34, 22, 179, 161
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
+    LTEXT           "QUno\nVersion 2.0",IDC_STATIC,40,10,130,15
+    LTEXT           "Copyright © 1997 Roger Deetz",IDC_STATIC,40,34,130,8
+    DEFPUSHBUTTON   "OK",IDOK,130,140,40,14,WS_GROUP
+    GROUPBOX        "How To Play",IDC_STATIC,35,75,135,60
+    LTEXT           "Click the card you want to play with the left mouse button.  If you want to draw, click the deck.  To make the computer play, click the image in the upper right corner.",
+                    IDC_STATIC,45,87,120,43
+    LTEXT           "Based on the card game UNO\nCopyright © 1947 Parker Brothers, Inc.",
+                    IDC_STATIC,40,51,130,19
+END
+
+IDD_PICKCOLOR DIALOG DISCARDABLE  0, 0, 142, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Wild Card"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "&Red",IDC_RED,"Button",BS_AUTORADIOBUTTON | WS_GROUP,30,
+                    20,55,10
+    CONTROL         "&Blue",IDC_BLUE,"Button",BS_AUTORADIOBUTTON,30,35,55,10
+    CONTROL         "&Yellow",IDC_YELLOW,"Button",BS_AUTORADIOBUTTON,30,50,
+                    55,10
+    CONTROL         "&Green",IDC_GREEN,"Button",BS_AUTORADIOBUTTON,30,65,55,
+                    10
+    DEFPUSHBUTTON   "OK",IDOK,95,110,40,14
+    GROUPBOX        "Choose a color for the Wild Card",IDC_WILDCOLOR,5,5,130,
+                    80
+    CONTROL         156,IDC_COLOR,"Static",SS_BITMAP,7,91,127,12
+END
+
+IDD_OPTIONS DIALOG DISCARDABLE  0, 0, 195, 213
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Player Options",IDC_STATIC,7,7,180,54
+    LTEXT           "Type &your name here:",IDC_STATIC,21,20,153,10
+    EDITTEXT        IDC_USERNAME,21,33,153,12,ES_AUTOHSCROLL
+    GROUPBOX        "Computer Options",IDC_STATIC,7,66,181,119
+    LTEXT           "Type a name for the &computer here:",IDC_STATIC,21,79,
+                    153,10
+    EDITTEXT        IDC_COMPUTERNAME,21,92,153,12,ES_AUTOHSCROLL
+    CONTROL         "&Intelligent",IDC_SMART,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,21,114,66,12
+    CONTROL         "&Wizard",IDC_WIZARD,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,88,114,47,13
+    CONTROL         "&Nerd",IDC_NERD,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,88,130,47,13
+    CONTROL         "Co&mputer",IDC_COMPUTE,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,88,146,47,13
+    CONTROL         "Co&wboy",IDC_COWBOY,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,88,162,47,13
+    CONTROL         166,IDC_PICTURE,"Static",SS_BITMAP | SS_SUNKEN,141,114,
+                    33,31
+    DEFPUSHBUTTON   "OK",IDOK,81,192,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,138,192,50,14
+END
+
+IDD_HINT DIALOG DISCARDABLE  0, 0, 252, 97
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Quick Hint"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Close",IDOK,195,76,50,14
+    PUSHBUTTON      "&Next >",IDNEXT,141,76,50,14
+    CONTROL         "&Show Quick Hints at startup",IDC_STARTUP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,77,102,13
+    LTEXT           "The current Quick Hint goes here.",IDC_HINT,43,7,202,63,
+                    SS_SUNKEN
+    ICON            IDI_HINT,IDC_STATIC,13,13,20,20
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_DECKHI              BITMAP  DISCARDABLE     "res\\deckhi.bmp"
+ID_RED_ONE              BITMAP  DISCARDABLE     "res\\red_one.bmp"
+ID_RED_TWO              BITMAP  DISCARDABLE     "res\\red_two.bmp"
+ID_RED_THREE            BITMAP  DISCARDABLE     "res\\red_thre.bmp"
+ID_RED_FOUR             BITMAP  DISCARDABLE     "res\\red_four.bmp"
+ID_RED_FIVE             BITMAP  DISCARDABLE     "res\\red_five.bmp"
+ID_RED_SIX              BITMAP  DISCARDABLE     "res\\red_six.bmp"
+ID_RED_SEVEN            BITMAP  DISCARDABLE     "res\\red_seve.bmp"
+ID_RED_EIGHT            BITMAP  DISCARDABLE     "res\\red_eigh.bmp"
+ID_RED_NINE             BITMAP  DISCARDABLE     "res\\red_nine.bmp"
+ID_RED_ZERO             BITMAP  DISCARDABLE     "res\\red_zero.bmp"
+ID_RED_DRAWTWO          BITMAP  DISCARDABLE     "res\\red_draw.bmp"
+ID_RED_SKIP             BITMAP  DISCARDABLE     "res\\red_skip.bmp"
+ID_WILD                 BITMAP  DISCARDABLE     "res\\wild.bmp"
+ID_BLUE_ZERO            BITMAP  DISCARDABLE     "res\\blu_zero.bmp"
+ID_BLUE_ONE             BITMAP  DISCARDABLE     "res\\blu_one.bmp"
+ID_BLUE_TWO             BITMAP  DISCARDABLE     "res\\blu_two.bmp"
+ID_BLUE_THREE           BITMAP  DISCARDABLE     "res\\blu_thre.bmp"
+ID_BLUE_FOUR            BITMAP  DISCARDABLE     "res\\blu_four.bmp"
+ID_BLUE_DRAWTWO         BITMAP  DISCARDABLE     "res\\blu_draw.bmp"
+ID_BLUE_EIGHT           BITMAP  DISCARDABLE     "res\\blu_eigh.bmp"
+ID_BLUE_FIVE            BITMAP  DISCARDABLE     "res\\blu_five.bmp"
+ID_BLUE_NINE            BITMAP  DISCARDABLE     "res\\blu_nine.bmp"
+ID_BLUE_SEVEN           BITMAP  DISCARDABLE     "res\\blu_seve.bmp"
+ID_BLUE_SIX             BITMAP  DISCARDABLE     "res\\blu_six.bmp"
+ID_BLUE_SKIP            BITMAP  DISCARDABLE     "res\\blu_skip.bmp"
+ID_GREEN_DRAWTWO        BITMAP  DISCARDABLE     "res\\gre_draw.bmp"
+ID_GREEN_EIGHT          BITMAP  DISCARDABLE     "res\\gre_eigh.bmp"
+ID_GREEN_FIVE           BITMAP  DISCARDABLE     "res\\gre_five.bmp"
+ID_GREEN_FOUR           BITMAP  DISCARDABLE     "res\\gre_four.bmp"
+ID_GREEN_NINE           BITMAP  DISCARDABLE     "res\\gre_nine.bmp"
+ID_GREEN_ONE            BITMAP  DISCARDABLE     "res\\gre_one.bmp"
+ID_GREEN_SEVEN          BITMAP  DISCARDABLE     "res\\gre_seve.bmp"
+ID_GREEN_SIX            BITMAP  DISCARDABLE     "res\\gre_six.bmp"
+ID_GREEN_SKIP           BITMAP  DISCARDABLE     "res\\gre_skip.bmp"
+ID_GREEN_THREE          BITMAP  DISCARDABLE     "res\\gre_thre.bmp"
+ID_GREEN_TWO            BITMAP  DISCARDABLE     "res\\gre_two.bmp"
+ID_GREEN_ZERO           BITMAP  DISCARDABLE     "res\\gre_zero.bmp"
+ID_YELLOW_DRAWTWO       BITMAP  DISCARDABLE     "res\\yel_draw.bmp"
+ID_YELLOW_EIGHT         BITMAP  DISCARDABLE     "res\\yel_eigh.bmp"
+ID_YELLOW_FIVE          BITMAP  DISCARDABLE     "res\\yel_five.bmp"
+ID_YELLOW_FOUR          BITMAP  DISCARDABLE     "res\\yel_four.bmp"
+ID_YELLOW_NINE          BITMAP  DISCARDABLE     "res\\yel_nine.bmp"
+ID_YELLOW_ONE           BITMAP  DISCARDABLE     "res\\yel_one.bmp"
+ID_YELLOW_SEVEN         BITMAP  DISCARDABLE     "res\\yel_seve.bmp"
+ID_YELLOW_SIX           BITMAP  DISCARDABLE     "res\\yel_six.bmp"
+ID_YELLOW_SKIP          BITMAP  DISCARDABLE     "res\\yel_skip.bmp"
+ID_YELLOW_THREE         BITMAP  DISCARDABLE     "res\\yel_thre.bmp"
+ID_YELLOW_TWO           BITMAP  DISCARDABLE     "res\\yel_two.bmp"
+ID_YELLOW_ZERO          BITMAP  DISCARDABLE     "res\\yel_zero.bmp"
+IDB_BLUE                BITMAP  DISCARDABLE     "res\\blue.bmp"
+IDB_RED                 BITMAP  DISCARDABLE     "res\\red.bmp"
+IDB_YELLOW              BITMAP  DISCARDABLE     "res\\yellow.bmp"
+IDB_GREEN               BITMAP  DISCARDABLE     "res\\green.bmp"
+IDB_DECKLO              BITMAP  DISCARDABLE     "res\\decklo.bmp"
+IDB_DECKMID             BITMAP  DISCARDABLE     "res\\deckmid.bmp"
+ID_BLUE_REVERSE         BITMAP  DISCARDABLE     "res\\blu_reve.bmp"
+ID_WILD_DRAWFOUR        BITMAP  DISCARDABLE     "res\\wild_draw.bmp"
+ID_RED_REVERSE          BITMAP  DISCARDABLE     "res\\red_reve.bmp"
+ID_GREEN_REVERSE        BITMAP  DISCARDABLE     "res\\gre_reve.bmp"
+ID_YELLOW_REVERSE       BITMAP  DISCARDABLE     "res\\yel_reve.bmp"
+IDB_WIZARD              BITMAP  DISCARDABLE     "res\\wizard.bmp"
+IDB_NERD                BITMAP  DISCARDABLE     "res\\nerd.bmp"
+IDB_COWBOY              BITMAP  DISCARDABLE     "res\\cowboy.bmp"
+IDB_COMPUTE             BITMAP  DISCARDABLE     "res\\compute.bmp"
+IDB_DECKHIMID           BITMAP  DISCARDABLE     "res\\deckhim.bmp"
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,7
+ PRODUCTVERSION 2,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "The All-American classic card game comes to your computer!\0"
+            VALUE "CompanyName", "RogCorp\0"
+            VALUE "FileDescription", "RogCorp QUno\0"
+            VALUE "FileVersion", "2.00.0007\0"
+            VALUE "InternalName", "QUno\0"
+            VALUE "LegalCopyright", "Copyright © 1997 Roger Deetz\0"
+            VALUE "OriginalFilename", "QUNO.EXE\0"
+            VALUE "ProductName", "RogCorp QUno 2.0\0"
+            VALUE "ProductVersion", "2.0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 188
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 206
+    END
+
+    IDD_HINT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 245
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 90
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "QUno\nQUno\nQUno Document\n\n\nQUno.Document\nQUno Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "QUno"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright"
+    ID_APP_EXIT             "Exit the application"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    IDS_HELP_HINT_1         "Save your Wild cards as long as you can, since you can play them at any time."
+    IDS_HELP_HINT_2         "When choosing the color after playing a Wild card, don't necessarily pick the color you have the most.\nAnother color may give you better flexibility in the future."
+    IDS_HELP_HINT_3         "A good time to play a Draw Two is right after a long run of a particular color.\nYour opponent will probably draw some cards of a different color than what has recently been played."
+    IDS_HELP_HINT_4         "Remember, it's not whether you win or lose, it's how to not get caught when you cheat."
+    IDS_HELP_HINT_5         "Send some money to Roger;  he might make some more great games like this one!"
+    IDS_HELP_HINT_6         "In a two-player game like this one, don't forget that a Skip and a Reverse have the same effect."
+    IDS_HELP_HINT_7         "There are two good strategies for using Draw Two and Wild Draw Four:\nPlay them early in the game to bury your opponent, or save them until the end to keep your opponent from going out."
+    IDS_HELP_HINT_8         "Play close attention to the color your opponent chooses for Wild cards.\nTry to change the color as soon as possible to put them on the defensive."
+    IDS_HELP_HINT_9         "The easiest way to win is to play all of your cards before your opponent does."
+    IDS_HELP_HINT_10        "Try to keep a multi-colored hand as long as you can.  This keeps your options open as the game winds down."
+    IDS_HELP_HINT_11        "If you think you'll ever see a Unix version of this game, you can just forget it!"
+    IDS_HELP_HINT_12        "If you need technical support using this product, you have two options:\nFigure it out on your own, or just live with your ignorance."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_HELP_CONTENTS        "Display online help contents"
+    ID_HELP_HINT            "Get a quick hint on Uno strategy"
+    ID_GAME_NEW             "Start a new game"
+    ID_GAME_DRAW            "Draw a card to add to your hand"
+    ID_GAME_FORCE           "Force the computer to take its turn"
+    ID_GAME_OPTIONS         "Configure various game options"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\quno.rc2"  // non-App Studio edited resources
+
+#include "afxres.rc"  	// Standard components
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

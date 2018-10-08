@@ -1,0 +1,237 @@
+//Microsoft App Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#ifdef APSTUDIO_INVOKED
+//////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\quno.rc2""  // non-App Studio edited resources\r\n"
+    "\r\n"
+    "#include ""afxres.rc""  \011// Standard components\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+IDR_MAINFRAME           ICON    DISCARDABLE     "RES\\QUNO.ICO"
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New Game\tF2",               ID_NEWGAME
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                   ID_APP_ABOUT
+    END
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    VK_F2,          ID_NEWGAME,             VIRTKEY,NOINVERT
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  34, 22, 179, 161
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
+    LTEXT           "QUno\nVersion 1.1",IDC_STATIC,40,10,119,15
+    LTEXT           "Copyright \251 1997 Roger Deetz",IDC_STATIC,40,34,119,8
+    DEFPUSHBUTTON   "OK",IDOK,130,140,40,14,WS_GROUP
+    GROUPBOX        "How To Play",IDC_STATIC,35,75,135,60
+    LTEXT           "Click the card you want to play with the left mouse button.  If you need to draw, click anywhere in the window.  To make the computer play, click anywhere in the window.",
+                    IDC_STATIC,45,87,120,43
+    LTEXT           "Based on the card game UNO\nCopyright \251 1947 Mattel, Inc.",
+                    IDC_STATIC,40,51,120,19
+END
+
+IDD_PICKCOLOR DIALOG DISCARDABLE  0, 0, 142, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Wild Card"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Red",IDC_RED,"Button",BS_AUTORADIOBUTTON | WS_GROUP,30,
+                    20,55,10
+    CONTROL         "Blue",IDC_BLUE,"Button",BS_AUTORADIOBUTTON,30,35,55,10
+    CONTROL         "Yellow",IDC_YELLOW,"Button",BS_AUTORADIOBUTTON,30,50,55,
+                    10
+    CONTROL         "Green",IDC_GREEN,"Button",BS_AUTORADIOBUTTON,30,65,55,
+                    10
+    DEFPUSHBUTTON   "OK",IDOK,95,110,40,14
+    GROUPBOX        "Pick a color for the Wild Card",IDC_WILDCOLOR,5,5,130,
+                    80
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_DECK                BITMAP  DISCARDABLE     "RES\\DECK.BMP"
+ID_RED_ONE              BITMAP  DISCARDABLE     "RES\\RED_ONE.BMP"
+ID_RED_TWO              BITMAP  DISCARDABLE     "RES\\RED_TWO.BMP"
+ID_RED_THREE            BITMAP  DISCARDABLE     "RES\\RED_THRE.BMP"
+ID_RED_FOUR             BITMAP  DISCARDABLE     "RES\\RED_FOUR.BMP"
+ID_RED_FIVE             BITMAP  DISCARDABLE     "RES\\RED_FIVE.BMP"
+ID_RED_SIX              BITMAP  DISCARDABLE     "RES\\RED_SIX.BMP"
+ID_RED_SEVEN            BITMAP  DISCARDABLE     "RES\\RED_SEVE.BMP"
+ID_RED_EIGHT            BITMAP  DISCARDABLE     "RES\\RED_EIGH.BMP"
+ID_RED_NINE             BITMAP  DISCARDABLE     "RES\\RED_NINE.BMP"
+ID_RED_ZERO             BITMAP  DISCARDABLE     "RES\\RED_ZERO.BMP"
+ID_RED_DRAWTWO          BITMAP  DISCARDABLE     "RES\\RED_DRAW.BMP"
+ID_RED_SKIP             BITMAP  DISCARDABLE     "RES\\RED_SKIP.BMP"
+ID_WILD                 BITMAP  DISCARDABLE     "RES\\WILD.BMP"
+ID_BLUE_ZERO            BITMAP  DISCARDABLE     "RES\\BLU_ZERO.BMP"
+ID_BLUE_ONE             BITMAP  DISCARDABLE     "RES\\BLU_ONE.BMP"
+ID_BLUE_TWO             BITMAP  DISCARDABLE     "RES\\BLU_TWO.BMP"
+ID_BLUE_THREE           BITMAP  DISCARDABLE     "RES\\BLU_THRE.BMP"
+ID_BLUE_FOUR            BITMAP  DISCARDABLE     "RES\\BLU_FOUR.BMP"
+ID_BLUE_DRAWTWO         BITMAP  DISCARDABLE     "RES\\BLU_DRAW.BMP"
+ID_BLUE_EIGHT           BITMAP  DISCARDABLE     "RES\\BLU_EIGH.BMP"
+ID_BLUE_FIVE            BITMAP  DISCARDABLE     "RES\\BLU_FIVE.BMP"
+ID_BLUE_NINE            BITMAP  DISCARDABLE     "RES\\BLU_NINE.BMP"
+ID_BLUE_SEVEN           BITMAP  DISCARDABLE     "RES\\BLU_SEVE.BMP"
+ID_BLUE_SIX             BITMAP  DISCARDABLE     "RES\\BLU_SIX.BMP"
+ID_BLUE_SKIP            BITMAP  DISCARDABLE     "RES\\BLU_SKIP.BMP"
+ID_GREEN_DRAWTWO        BITMAP  DISCARDABLE     "RES\\GRE_DRAW.BMP"
+ID_GREEN_EIGHT          BITMAP  DISCARDABLE     "RES\\GRE_EIGH.BMP"
+ID_GREEN_FIVE           BITMAP  DISCARDABLE     "RES\\GRE_FIVE.BMP"
+ID_GREEN_FOUR           BITMAP  DISCARDABLE     "RES\\GRE_FOUR.BMP"
+ID_GREEN_NINE           BITMAP  DISCARDABLE     "RES\\GRE_NINE.BMP"
+ID_GREEN_ONE            BITMAP  DISCARDABLE     "RES\\GRE_ONE.BMP"
+ID_GREEN_SEVEN          BITMAP  DISCARDABLE     "RES\\GRE_SEVE.BMP"
+ID_GREEN_SIX            BITMAP  DISCARDABLE     "RES\\GRE_SIX.BMP"
+ID_GREEN_SKIP           BITMAP  DISCARDABLE     "RES\\GRE_SKIP.BMP"
+ID_GREEN_THREE          BITMAP  DISCARDABLE     "RES\\GRE_THRE.BMP"
+ID_GREEN_TWO            BITMAP  DISCARDABLE     "RES\\GRE_TWO.BMP"
+ID_GREEN_ZERO           BITMAP  DISCARDABLE     "RES\\GRE_ZERO.BMP"
+ID_YELLOW_DRAWTWO       BITMAP  DISCARDABLE     "RES\\YEL_DRAW.BMP"
+ID_YELLOW_EIGHT         BITMAP  DISCARDABLE     "RES\\YEL_EIGH.BMP"
+ID_YELLOW_FIVE          BITMAP  DISCARDABLE     "RES\\YEL_FIVE.BMP"
+ID_YELLOW_FOUR          BITMAP  DISCARDABLE     "RES\\YEL_FOUR.BMP"
+ID_YELLOW_NINE          BITMAP  DISCARDABLE     "RES\\YEL_NINE.BMP"
+ID_YELLOW_ONE           BITMAP  DISCARDABLE     "RES\\YEL_ONE.BMP"
+ID_YELLOW_SEVEN         BITMAP  DISCARDABLE     "RES\\YEL_SEVE.BMP"
+ID_YELLOW_SIX           BITMAP  DISCARDABLE     "RES\\YEL_SIX.BMP"
+ID_YELLOW_SKIP          BITMAP  DISCARDABLE     "RES\\YEL_SKIP.BMP"
+ID_YELLOW_THREE         BITMAP  DISCARDABLE     "RES\\YEL_THRE.BMP"
+ID_YELLOW_TWO           BITMAP  DISCARDABLE     "RES\\YEL_TWO.BMP"
+ID_YELLOW_ZERO          BITMAP  DISCARDABLE     "RES\\YEL_ZERO.BMP"
+IDB_BLUE                BITMAP  DISCARDABLE     "RES\\BLUE.BMP"
+IDB_RED                 BITMAP  DISCARDABLE     "RES\\RED.BMP"
+IDB_YELLOW              BITMAP  DISCARDABLE     "RES\\YELLOW.BMP"
+IDB_GREEN               BITMAP  DISCARDABLE     "RES\\GREEN.BMP"
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "QUno\nQuno\nQuno Document\n\n\nQuno.Document\nQuno Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "QUno"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright"
+    ID_APP_EXIT             "Quit the application"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEWGAME              "Starts a new game"
+END
+
+
+#ifndef APSTUDIO_INVOKED
+////////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\quno.rc2"  // non-App Studio edited resources
+
+#include "afxres.rc"  	// Standard components
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

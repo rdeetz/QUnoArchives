@@ -1,0 +1,5 @@
+    // hook up the events
+    //m_weh.DispEventAdvise(static_cast<IUnknown*>(m_spBrowser));
+
+    // unhook the events
+    //m_weh.DispEventUnadvise(static_cast<IUnknown*>(m_spBrowser));

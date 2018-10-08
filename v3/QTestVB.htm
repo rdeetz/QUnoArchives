@@ -1,0 +1,526 @@
+<html>
+<head>
+<meta name="Generator" content="Microsoft Visual Studio 6.0">
+<meta name="Copyright" content="Copyright © 2001 Roger Deetz">
+<title>RogCorp QUno Engine Test (VBScript)</title>
+
+<link rel="stylesheet" href="QTest.css" type="text/css">
+
+<script language="VBScript">
+Const UnoNoColor = 0
+Const UnoRed = 1
+Const UnoBlue = 2
+Const UnoYellow = 3
+Const UnoGreen = 4
+
+Const UnoNoValue = -6
+Const UnoWildDrawFour = -5
+Const UnoWild = -4
+Const UnoDrawTwo = -3
+Const UnoSkip = -2
+Const UnoReverse = -1
+Const UnoZero = 0
+Const UnoOne = 1
+Const UnoTwo = 2
+Const UnoThree = 3
+Const UnoFour = 4
+Const UnoFive = 5
+Const UnoSix = 6
+Const UnoSeven = 7
+Const UnoEight = 8
+Const UnoNine = 9
+
+Const UnoComputer = 0
+Const UnoHuman = 1
+
+Dim m_lPlayerIndex
+
+Sub Initialize()
+    m_Game.Title = "My New Web Game"
+    
+    m_Game.CreatePlayer "Roger", UnoHuman
+    m_Game.CreatePlayer "Nadine", UnoHuman
+    m_Game.CreatePlayer "Livy", UnoHuman
+    
+    Dim i
+    For i = 0 To (m_Game.Players.Count - 1)
+        lblPlayer(i).innerText = PlayerToString(m_Game.Players(i))
+    Next
+    
+    m_Game.Start
+    
+    RefreshDeck
+    RefreshHands
+
+End Sub
+
+Sub Terminate()
+    m_Game.Stop
+
+End Sub
+
+Sub Draw()
+    m_Game.Players(m_lPlayerIndex).Draw
+    
+    RefreshHands
+    RefreshDeck
+
+End Sub
+
+Sub Play()
+    Dim lCard
+    lCard = lstHand(m_lPlayerIndex).selectedIndex
+    
+    Dim pCard
+    Set pCard = m_Game.Players(m_lPlayerIndex).Hand(lCard)
+
+    If pCard Is Nothing Then
+        Exit Sub
+    End If
+
+    Dim bPlayed
+    bPlayed = m_Game.Players(m_lPlayerIndex).Play(lCard)
+    
+    If bPlayed Then
+        RefreshHands
+        RefreshDeck
+    Else
+        lblCantPlay.style.visibility = "visible"
+    End If
+
+End Sub
+
+Sub Pass()
+    Dim bPassed
+    bPassed = m_Game.Players(m_lPlayerIndex).Pass()
+    
+    If bPassed Then
+        RefreshHands
+        RefreshDeck
+    Else
+        lblCantPass.style.visibility = "visible"
+    End If
+
+End Sub
+
+Sub HandClick()
+    lblCantPlay.style.visibility = "hidden"
+    lblCantPass.style.visibility = "hidden"
+
+End Sub
+
+Sub PlayAfterDrawClick()
+    If chkPlayAfterDraw.checked Then
+        m_Game.PlayAfterDraw = True
+    Else
+        m_Game.PlayAfterDraw = False
+    End If
+    
+End Sub
+
+Sub RefreshDeck()
+    lblGameTitle.innerText = m_Game.Title
+
+    If m_Game.PlayAfterDraw Then
+        chkPlayAfterDraw.checked = True
+    Else
+        chkPlayAfterDraw.checked = False
+    End If
+    
+    lblDrawStackCount.innerText = m_Game.Deck.DrawCount
+    lblPlayedStackCount.innerText = m_Game.Deck.PlayedCount
+    lblActiveCard.innerText = CardToString(m_Game.Deck.ActiveCard)
+    lblWildColor.innerText = CardColorToString(m_Game.WildColor)
+    
+    lblCantPlay.style.visibility = "hidden"
+    lblCantPass.style.visibility = "hidden"
+    
+End Sub
+
+Sub RefreshHands()
+    Dim i
+    For i = 0 To (m_Game.Players.Count - 1)
+        Dim j
+        For j = 0 To lstHand(i).options.length
+            lstHand(i).options.remove 0
+        Next
+        
+        Dim c
+        For Each c In m_Game.Players(i).Hand
+            Dim oEl
+            Set oEl = document.createElement("OPTION")
+            oEl.text = CardToString(c)
+            
+            lstHand(i).options.add oEl
+        Next
+        
+    Next
+    
+End Sub
+
+Sub ChangePlayerTurn(lIndex)
+    m_lPlayerIndex = lIndex
+    
+    Dim i
+    For i = 0 To (m_Game.Players.Count - 1)
+        lblPlayer(i).style.color = "black"
+        optPlayer(i).checked = False
+        lstHand(i).disabled = True
+    Next
+    
+    lblPlayer(m_lPlayerIndex).style.color = "red"
+    optPlayer(m_lPlayerIndex).checked = True
+    
+    With lstHand(m_lPlayerIndex)
+        .disabled = False
+        
+        If .options.length > 0 Then
+            .selectedIndex = 0
+        End If
+        
+    End With
+    
+    lblCantPlay.style.visibility = "hidden"
+    lblCantPass.style.visibility = "hidden"
+    
+End Sub
+
+Function PlayerToString(oPlayer)
+    Dim s
+    
+    If oPlayer Is Nothing Then
+        PlayerToString = ""
+        Exit Function
+    End If
+    
+    s = oPlayer.Name
+    
+    Select Case oPlayer.Type
+        Case UnoComputer
+            s = s & " (Computer)"
+        Case UnoHuman
+            s = s & " (Human)"
+    End Select
+    
+    PlayerToString = s
+    
+End Function
+
+Function CardToString(oCard)
+    Dim s
+    
+    If oCard Is Nothing Then
+        CardToString = ""
+        Exit Function
+    End If
+    
+    If (oCard.Color = UnoNoColor) And (oCard.Value = UnoNoValue) Then
+        CardToString = "<Not Initialized>"
+        Exit Function
+    End If
+    
+    s = CardColorToString(oCard.Color)
+    s = s & " " & CardValueToString(oCard.Value)
+    
+    CardToString = s
+    
+End Function
+
+Function CardColorToString(eColor)
+    Dim s
+    
+    Select Case eColor
+        Case UnoNoColor
+            s = "No Color"
+        Case UnoRed
+            s = "Red"
+        Case UnoBlue
+            s = "Blue"
+        Case UnoYellow
+            s = "Yellow"
+        Case UnoGreen
+            s = "Green"
+        Case Else
+            s = "<Invalid Color>"
+    End Select
+    
+    CardColorToString = s
+    
+End Function
+
+Function CardValueToString(eValue)
+    Dim s
+    
+    Select Case eValue
+        Case UnoNoValue
+            s = "No Value"
+        Case UnoZero
+            s = "0"
+        Case UnoOne
+            s = "1"
+        Case UnoTwo
+            s = "2"
+        Case UnoThree
+            s = "3"
+        Case UnoFour
+            s = "4"
+        Case UnoFive
+            s = "5"
+        Case UnoSix
+            s = "6"
+        Case UnoSeven
+            s = "7"
+        Case UnoEight
+            s = "8"
+        Case UnoNine
+            s = "9"
+        Case UnoDrawTwo
+            s = "Draw Two"
+        Case UnoSkip
+            s = "Skip"
+        Case UnoReverse
+            s = "Reverse"
+        Case UnoWild
+            s = "Wild"
+        Case UnoWildDrawFour
+            s = "Wild Draw Four"
+        Case Else
+            s = "<Invalid Value>"
+    End Select
+    
+    CardValueToString = s
+    
+End Function
+
+Function PromptForWildColor()
+    ' TODO: fix this
+    PromptForWildColor = UnoRed
+    
+End Function
+</script>
+
+<object id="m_Game" classid="clsid:46AFD017-CEF0-47B5-B2F2-0477AE5D0C0C">
+    <param name="HandSize" value="5">
+    <param name="PlayAfterDraw" value="True">
+</object>
+
+<script for="m_Game" event="PlayerTurn(lPlayer)" language="VBScript">
+    Dim pPlayer
+    Set pPlayer = m_Game.Players(lPlayer)
+    
+    If pPlayer Is Nothing Then
+        Exit Sub
+    End If
+
+    ChangePlayerTurn lPlayer
+
+</script>
+
+<script for="m_Game" event="PlayerChooseWildColor(lPlayer, peColor)" language="VBScript">
+    Dim pPlayer
+    Set pPlayer = m_Game.Players(lPlayer)
+    
+    If pPlayer Is Nothing Then
+        Exit Sub
+    End If
+    
+    peColor = PromptForWildColor()
+
+</script>
+
+<script for="m_Game" event="PlayerUno(lPlayer)" language="VBScript">
+    Dim pPlayer
+    Set pPlayer = m_Game.Players(lPlayer)
+    
+    If pPlayer Is Nothing Then
+        Exit Sub
+    End If
+    
+    Dim s
+    s = (PlayerToString(pPlayer) & " has UNO!")
+    
+    lblPlayerUno.innerText = s
+    lblPlayerUno.style.visibility = "visible"
+
+</script>
+
+<script for="m_Game" event="PlayerOut(lPlayer, bKeepPlaying" language="VBScript">
+    Dim pPlayer
+    Set pPlayer = m_Game.Players(lPlayer)
+    
+    If pPlayer Is Nothing Then
+        Exit Sub
+    End If
+    
+    Dim s
+    s = (PlayerToString(pPlayer) & " is out!")
+    
+    lblPlayerOut.innerText = s
+    lblPlayerOut.style.visibility = "visible"
+    
+    Dim nResult
+    nResult = confirm("Do you want to keep playing?")
+    
+    If nResult Then
+        pbKeepPlaying = True
+    Else
+        pbKeepPlaying = False
+    End If
+
+</script>
+
+<script for="m_Game" event="GameOver()" language="VBScript">
+    lblGameOver.style.visibility = "visible"
+    
+</script>
+
+</head>
+<body class="testpage" onload="Initialize()" onunload="Terminate()">
+
+<table width="100%">
+    <tr>
+        <td>
+            RogCorp QUno Engine Test (VBScript)
+        </td>
+        <td>
+            <ul>
+                <li><a href="QTest.htm" class="stdlink">Home</a></li>
+                <li><a href="QTestJ.htm" class="stdlink">JScript Edition</a></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <span id="lblGameTitle" class="boldtext">&lt;Game&gt;</span>
+        </td>
+        <td>
+            <input id="chkPlayAfterDraw" type="checkbox" onclick="PlayAfterDrawClick()">
+            <label for="chkPlayAfterDraw">Play After Draw</label>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        Draw Count
+                    </td>
+                    <td>
+                        <span id="lblDrawStackCount" class="bluetext">0</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Played Count
+                    </td>
+                    <td>
+                        <span id="lblPlayedStackCount" class="bluetext">0</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Active Card
+                    </td>
+                    <td>
+                        <span id="lblActiveCard" class="bluetext">&lt;No Active Card&gt;</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Wild Color
+                    </td>
+                    <td>
+                        <span id="lblWildColor" class="bluetext">&lt;No Wild Color&gt;</span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <span id="lblGameOver" class="greentext" style="visibility: hidden;">Game Over!</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="lblPlayerOut" class="greentext" style="visibility: hidden;">&lt;Player&gt; is out!</span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <span id="lblCantPlay" class="redtext" style="visibility: hidden;">You can't play that card!</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span id="lblCantPass" class="redtext" style="visibility: hidden;">You can't pass!</span>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <input id="optPlayer" name="optPlayers" type="radio">
+            <label id="lblPlayer" for="optPlayer"><label>
+        </td>
+        <td>
+            <input id="optPlayer" name="optPlayers" type="radio">
+            <label id="lblPlayer" for="optPlayer"><label>
+        </td>
+        <td>
+            <input id="optPlayer" name="optPlayers" type="radio">
+            <label id="lblPlayer" for="optPlayer"><label>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select id="lstHand" size="7" style="width: 150px;" onclick="HandClick()"></select>
+        </td>
+        <td>
+            <select id="lstHand" size="7" style="width: 150px;" onclick="HandClick()"></select>
+        </td>
+        <td>
+            <select id="lstHand" size="7" style="width: 150px;" onclick="HandClick()"></select>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <span id="lblPlayerUno" style="visibility: hidden;">&lt;Player&gt; has UNO!</span>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <button id="cmdDraw" class="stdbutton" onclick="Draw()">Draw</button>
+                    </td>
+                    <td>
+                        <button id="cmdPlay" class="stdbutton" onclick="Play()">Play</button>
+                    </td>
+                    <td>
+                        <button id="cmdPass" class="stdbutton" onclick="Pass()">Pass</button>
+                    </td>
+                </tr>
+            </table>
+        <td>
+    </tr>
+</table>
+
+</body>
+</html>

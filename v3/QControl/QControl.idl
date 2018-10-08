@@ -1,0 +1,72 @@
+/////////////////////////////////////////////////////////////////////
+//
+// QControl.idl - interface definitions for the 
+//                RogCorp QControls Library 1.0
+//
+// Copyright © 2000-2001 Roger Deetz
+//
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+#include "olectl.h"
+#include "QCDispID.h"
+
+[
+    object,
+    uuid(8171D545-84BA-43FB-A82F-247D4379B74B),
+    dual,
+    helpstring("IUnoCardView Interface"),
+    pointer_default(unique)
+]
+interface IUnoCardView : IDispatch
+{
+    [propget, id(DISPID_UNOCARDVIEW_CARD), helpstring("Returns or sets the card")]
+    HRESULT Card([out, retval] IDispatch** ppCard);
+    [propput, id(DISPID_UNOCARDVIEW_CARD), helpstring("Returns or sets the card")]
+    HRESULT Card([in] IDispatch* pCard);
+    [propget, id(DISPID_BORDERCOLOR), helpstring("Returns or sets the border color")]
+    HRESULT BorderColor([out, retval] OLE_COLOR* pcBorderColor);
+    [propput, id(DISPID_BORDERCOLOR), helpstring("Returns or sets the border color")]
+    HRESULT BorderColor([in] OLE_COLOR cBorderColor);
+    [propget, id(DISPID_BORDERSTYLE), helpstring("Returns or sets the border style")]
+    HRESULT BorderStyle([out, retval] long* plBorderStyle);
+    [propput, id(DISPID_BORDERSTYLE), helpstring("Returns or sets the border style")]
+    HRESULT BorderStyle([in] long lBorderStyle);
+    [propget, id(DISPID_BORDERVISIBLE), helpstring("Returns or sets the border visibility")]
+    HRESULT BorderVisible([out, retval] VARIANT_BOOL* pbBorderVisible);
+    [propput, id(DISPID_BORDERVISIBLE), helpstring("Returns or sets the border visibility")]
+    HRESULT BorderVisible([in] VARIANT_BOOL bBorderVisible);
+    [propget, id(DISPID_BORDERWIDTH), helpstring("Returns or sets the border width")]
+    HRESULT BorderWidth([out, retval] long* plBorderWidth);
+    [propput, id(DISPID_BORDERWIDTH), helpstring("Returns or sets the border width")]
+    HRESULT BorderWidth([in] long lBorderWidth);
+    [propget, id(DISPID_MOUSEPOINTER), helpstring("Returns or sets the mouse pointer")]
+    HRESULT MousePointer([out, retval] long* plMousePointer);
+    [propput, id(DISPID_MOUSEPOINTER), helpstring("Returns or sets the mouse pointer")]
+    HRESULT MousePointer([in] long lMousePointer);
+    [propget, id(DISPID_TABSTOP), helpstring("Returns or sets the tab stop")]
+    HRESULT TabStop([out, retval] VARIANT_BOOL* pbTabStop);
+    [propput, id(DISPID_TABSTOP), helpstring("Returns or sets the tab stop")]
+    HRESULT TabStop([in] VARIANT_BOOL bTabStop);
+};
+
+[
+    uuid(9F88C833-49F7-457A-9ABF-9EB3461B93BE),
+    version(1.0),
+    helpstring("RogCorp QControls Library 1.0 Type Library")
+]
+library QControlLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [
+        uuid(029B4FE1-EC0D-4975-9D23-9D97849D18F7),
+        helpstring("RogCorp UnoCardView Control")
+    ]
+    coclass UnoCardView
+    {
+        [default] interface IUnoCardView;
+    };
+};

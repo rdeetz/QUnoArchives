@@ -1,0 +1,59 @@
+/////////////////////////////////////////////////////////////////////
+//
+// QEDispID.h - definition of the IDispatch IDs for the 
+//              RogCorp QUno Engine 1.0
+//
+// Copyright © 2000-2001 Roger Deetz
+//
+
+#ifndef __QEDISPID_H_
+#define __QEDISPID_H_
+
+#define DISPID_UNOCARD_VALUE            1001
+#define DISPID_UNOCARD_COLOR            1002
+
+#define DISPID_UNOHAND_COUNT            2001
+#define DISPID_UNOHAND_ITEM             2002 // DISPID_VALUE
+#define DISPID_UNOHAND_ADD              2003
+#define DISPID_UNOHAND_REMOVE           2004
+#define DISPID_UNOHAND_CLEAR            2005
+
+#define DISPID_UNOPLAYER_NAME           3001
+#define DISPID_UNOPLAYER_TYPE           3002
+#define DISPID_UNOPLAYER_HAND           3003
+#define DISPID_UNOPLAYER_DRAW           3004
+#define DISPID_UNOPLAYER_PLAY           3005
+#define DISPID_UNOPLAYER_PASS           3006
+
+#define DISPID_UNOPLAYERS_COUNT         4001
+#define DISPID_UNOPLAYERS_ITEM          4002 // DISPID_VALUE
+#define DISPID_UNOPLAYERS_ADD           4003
+#define DISPID_UNOPLAYERS_REMOVE        4004
+#define DISPID_UNOPLAYERS_CLEAR         4005
+
+#define DISPID_UNODECK_DRAWCOUNT        5001
+#define DISPID_UNODECK_PLAYEDCOUNT      5002
+#define DISPID_UNODECK_ACTIVECARD       5003
+#define DISPID_UNODECK_DRAW             5004
+#define DISPID_UNODECK_PLAY             5005
+
+#define DISPID_UNOGAME_TITLE            6001
+#define DISPID_UNOGAME_PLAYERS          6002
+#define DISPID_UNOGAME_DECK             6003
+#define DISPID_UNOGAME_WILDCOLOR        6004
+#define DISPID_UNOGAME_CREATEPLAYER     6005
+#define DISPID_UNOGAME_START            6006
+#define DISPID_UNOGAME_STOP             6007
+#define DISPID_UNOGAME_ISCARDPLAYABLE   6008
+#define DISPID_UNOGAME_HANDSIZE         6009
+#define DISPID_UNOGAME_PLAYAFTERDRAW    6010
+
+#define DISPID_UNOGAMEEVENTS_PLAYERTURN 6501
+#define DISPID_UNOGAMEEVENTS_PLAYERCHOOSEWILDCOLOR 6502
+#define DISPID_UNOGAMEEVENTS_PLAYERUNO  6503
+#define DISPID_UNOGAMEEVENTS_PLAYEROUT  6504
+#define DISPID_UNOGAMEEVENTS_GAMEOVER   6505
+
+#define DISPID_UNOENGINE_ACTIVEGAME     7001
+
+#endif //__QEDISPID_H_

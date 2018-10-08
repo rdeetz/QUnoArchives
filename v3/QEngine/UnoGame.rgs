@@ -1,0 +1,26 @@
+HKCR
+{
+    QEngine.UnoGame.1 = s 'RogCorp UnoGame Object'
+    {
+        CLSID = s '{46AFD017-CEF0-47B5-B2F2-0477AE5D0C0C}'
+    }
+    QEngine.UnoGame = s 'RogCorp UnoGame Object'
+    {
+        CLSID = s '{46AFD017-CEF0-47B5-B2F2-0477AE5D0C0C}'
+        CurVer = s 'QEngine.UnoGame.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {46AFD017-CEF0-47B5-B2F2-0477AE5D0C0C} = s 'RogCorp UnoGame Object'
+        {
+            ProgID = s 'QEngine.UnoGame.1'
+            VersionIndependentProgID = s 'QEngine.UnoGame'
+            ForceRemove 'Programmable'
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+            'TypeLib' = s '{94988F36-AEF2-4004-8B0E-7C0843177B57}'
+        }
+    }
+}

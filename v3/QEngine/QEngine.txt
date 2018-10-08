@@ -1,0 +1,290 @@
+[
+    uuid(023B8A9C-F4C2-485d-899C-532DE93A71D9),
+    helpstring("IUnoPlayerEvents Interface"),
+]
+dispinterface IUnoPlayerEvents
+{
+    properties:
+    methods:
+    [id(DISPID_UNOPLAYEREVENTS_CHOOSEWILDCOLOR), helpstring("Fired when the player needs to choose a Wild card color")]
+    void ChooseWildColor([in, out] UnoColor* peColor);
+};
+
+[default, source] dispinterface IUnoPlayerEvents;
+
+#define DISPID_UNOPLAYEREVENTS_CHOOSEWILDCOLOR 3501
+
+#include "UnoPlayerCP.h"
+
+public CProxyIUnoPlayerEvents<CUnoPlayer>,
+public IConnectionPointContainerImpl<CUnoPlayer>
+
+COM_INTERFACE_ENTRY_IMPL(IConnectionPointContainer)
+
+BEGIN_CONNECTION_POINT_MAP(CUnoPlayer)
+    CONNECTION_POINT_ENTRY(DIID_IUnoPlayerEvents)
+END_CONNECTION_POINT_MAP()
+
+[helpstring("Forces the player to take a turn")]
+HRESULT TakeTurn();
+[helpstring("Asks the player to select a Wild card color")]
+HRESULT ChooseWildColor([in, out] UnoColor* peColor);
+
+STDMETHOD(TakeTurn)();
+STDMETHOD(ChooseWildColor)(UnoColor* peColor);
+
+void ComputerDraw();
+bool ComputerPlay(long lIndex);
+bool ComputerPass();
+void ComputerTakeTurn();
+UnoColor ComputerChooseWildColor();
+
+void HumanDraw();
+bool HumanPlay(long lIndex);
+bool HumanPass();
+void HumanTakeTurn();
+UnoColor HumanChooseWildColor();
+
+STDMETHODIMP CUnoPlayer::TakeTurn() {
+    switch (m_eType) {
+        case UnoComputer:
+            ComputerTakeTurn();
+            break;
+
+        case UnoHuman:
+            HumanTakeTurn();
+            break;
+
+        default:
+            ATLTRACE(_T("Player TakeTurn type is unknown\n"));
+            return S_FALSE;
+            break;
+    }
+
+    return S_OK;
+}
+
+STDMETHODIMP CUnoPlayer::ChooseWildColor(UnoColor* peColor) {
+    switch (m_eType) {
+        case UnoComputer:
+            *peColor = ComputerChooseWildColor();
+            break;
+
+        case UnoHuman:
+            *peColor = HumanChooseWildColor();
+            break;
+
+        default:
+            *peColor = UnoNoColor;
+
+            ATLTRACE(_T("Player ChooseWildColor type is unknown\n"));
+            return S_FALSE;
+            break;
+    }
+
+    return S_OK;
+}
+
+void CUnoPlayer::ComputerDraw() {
+    return;
+}
+
+bool CUnoPlayer::ComputerPlay(long lIndex) {
+    bool bPlayed = false;
+    return bPlayed;
+}
+
+bool CUnoPlayer::ComputerPass() {
+    bool bPassed = false;
+    return bPassed;
+}
+
+void CUnoPlayer::ComputerTakeTurn() {
+    return;
+}
+
+/*
+UnoColor CUnoPlayer::ComputerChooseWildColor() {
+    CSimpleMap<UnoColor, long> colors;
+    colors.Add(UnoRed, 0);
+    colors.Add(UnoBlue, 0);
+    colors.Add(UnoYellow, 0);
+    colors.Add(UnoGreen, 0);
+
+    long lCount;
+    m_spHand->get_Count(&lCount);
+
+    for (long lIndex = 0; lIndex < lCount; lIndex++) {
+        CComPtr<IUnoCard> spCard;
+        m_spHand->get_Item(lIndex, &spCard);
+
+        UnoColor eColor;
+        spCard->get_Color(&eColor);
+
+        long lCounter = colors.Lookup(eColor);
+        lCounter++;
+
+        colors.SetAt(eColor, lCounter);
+    }
+
+    for (long i = 0; i < (colors.GetSize() - 1); i++) {
+        long x = colors.GetValueAt(i);
+        long y = colors.GetValueAt(i + 1);
+
+        if (x > y) {
+            UnoColor eTemp1 = colors.GetKeyAt(i);
+            long lTemp1 = colors.GetValueAt(i);
+
+            UnoColor eTemp2 = colors.GetKeyAt(i + 1);
+            long lTemp2 = colors.GetValueAt(i + 1);
+
+            // TODO: swap the colors
+        }
+    }
+
+    UnoColor eMostFrequentColor = colors.GetKeyAt(colors.GetSize() - 1);
+
+    return eMostFrequentColor;
+}
+*/
+
+void CUnoPlayer::HumanDraw() {
+    if (m_spGameCmd) {
+        CComPtr<IUnoCard> spCard;
+        HRESULT hr = m_spGameCmd->Draw(&spCard);
+
+        if (SUCCEEDED(hr) && spCard) {
+            hr = m_spHand->Add(spCard);
+        }
+    }
+
+    return;
+}
+
+bool CUnoPlayer::HumanPlay(long lIndex) {
+    bool bPlayed = false;
+
+    if (m_spGameCmd) {
+        CComPtr<IUnoCard> spCard;
+        HRESULT hr = m_spHand->get_Item(lIndex, &spCard);
+
+        if (SUCCEEDED(hr) && spCard) {
+            VARIANT_BOOL vbPlayed;
+            hr = m_spGameCmd->Play(spCard, &vbPlayed);
+
+            if (vbPlayed) {
+                CComPtr<IUnoCard> spDummy;
+                hr = m_spHand->Remove(lIndex, &spDummy);
+
+                hr = m_spGameCmd->ImFinished();
+
+                bPlayed = true;
+            }
+        }
+
+    }
+    
+    return bPlayed;
+}
+
+bool CUnoPlayer::HumanPass() {
+    bool bPassed = false;
+
+    if (m_spGameCmd) {
+        VARIANT_BOOL vbPassed;
+        HRESULT hr = m_spGameCmd->Pass(&vbPassed);
+
+        if (vbPassed) {
+            bPassed = true;
+        }
+    }
+
+    return bPassed;
+}
+
+void CUnoPlayer::HumanTakeTurn() {
+    return;
+}
+
+UnoColor CUnoPlayer::HumanChooseWildColor() {
+    return UnoNoColor;
+}
+
+    switch (m_eType) {
+        case UnoComputer:
+            ComputerDraw();
+            break;
+
+        case UnoHuman:
+            HumanDraw();
+            break;
+
+        default:
+            ATLTRACE(_T("Player Draw type is unknown\n"));
+            return S_FALSE;
+            break;
+    }
+
+    bool bPlayed;
+
+    switch (m_eType) {
+        case UnoComputer:
+            bPlayed = ComputerPlay(lIndex);
+
+            if (bPlayed) {
+                *pbPlayed = VARIANT_TRUE;
+            } else {
+                *pbPlayed = VARIANT_FALSE;
+            }
+
+            break;
+
+        case UnoHuman:
+            bPlayed = HumanPlay(lIndex);
+
+            if (bPlayed) {
+                *pbPlayed = VARIANT_TRUE;
+            } else {
+                *pbPlayed = VARIANT_FALSE;
+            }
+
+            break;
+
+        default:
+            *pbPlayed = VARIANT_FALSE;
+
+            ATLTRACE(_T("Player Play type is unknown\n"));
+            return S_FALSE;
+            break;
+    }
+
+    bool bPassed;
+
+    switch (m_eType) {
+        case UnoComputer:
+            bPassed = ComputerPass();
+
+            if (bPassed) {
+                *pbPassed = VARIANT_TRUE;
+            } else {
+                *pbPassed = VARIANT_FALSE;
+            }
+
+            break;
+
+        case UnoHuman:
+            bPassed = HumanPass();
+
+            if (bPassed) {
+                *pbPassed = VARIANT_TRUE;
+            } else {
+                *pbPassed = VARIANT_FALSE;
+            }
+
+            break;
+
+        default:
+            ATLTRACE(_T("Player Pass type is unknown\n"));
+            return S_FALSE;
+            break;
+    }

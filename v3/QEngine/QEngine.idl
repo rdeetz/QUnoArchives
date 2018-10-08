@@ -1,0 +1,353 @@
+/////////////////////////////////////////////////////////////////////
+//
+// QEngine.idl - interface definitions for the 
+//               RogCorp QUno Engine 1.0
+//
+// Copyright © 2000-2001 Roger Deetz
+//
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+#include "QEDispID.h"
+
+typedef [helpstring("Values supported by cards")] enum 
+{
+    UnoNoValue      = -6,
+    UnoWildDrawFour = -5,
+    UnoWild         = -4,
+    UnoDrawTwo      = -3,
+    UnoSkip         = -2,
+    UnoReverse      = -1,
+    UnoZero         = 0,
+    UnoOne          = 1,
+    UnoTwo          = 2,
+    UnoThree        = 3,
+    UnoFour         = 4,
+    UnoFive         = 5,
+    UnoSix          = 6,
+    UnoSeven        = 7,
+    UnoEight        = 8,
+    UnoNine         = 9
+} UnoValue;
+
+typedef [helpstring("Colors supported by cards")] enum 
+{
+    UnoNoColor = 0,
+    UnoRed     = 1,
+    UnoBlue    = 2,
+    UnoYellow  = 3,
+    UnoGreen   = 4
+} UnoColor;
+
+typedef [helpstring("Types of player supported by the engine")] enum 
+{
+    UnoComputer = 0,
+    UnoHuman    = 1,
+} UnoPlayerType;
+
+[
+    object,
+    uuid(3CD772B7-C253-44B2-A711-A09FA4579443),
+    dual,
+    helpstring("IUnoCard Interface"),
+    pointer_default(unique)
+]
+interface IUnoCard : IDispatch
+{
+    [propget, id(DISPID_UNOCARD_VALUE), helpstring("Returns the value of the card")]
+    HRESULT Value([out, retval] UnoValue* peValue);
+    [propget, id(DISPID_UNOCARD_COLOR), helpstring("Returns the color of the card")]
+    HRESULT Color([out, retval] UnoColor* peColor);
+};
+
+[
+    object,
+    uuid(EBA254CD-A44B-42bf-950F-D0B13CCBED6F),
+    hidden,
+    helpstring("IUnoCardInit Interface"),
+    pointer_default(unique)
+]
+interface IUnoCardInit : IUnknown
+{
+    [helpstring("Initializes the card")]
+    HRESULT Initialize([in] UnoValue eValue, [in] UnoColor eColor);
+};
+
+[
+    object,
+    uuid(9AC2D47E-B781-429A-A750-C74B76C4FBF6),
+    dual,
+    helpstring("IUnoHand Interface"),
+    pointer_default(unique)
+]
+interface IUnoHand : IDispatch
+{
+    [propget, id(DISPID_UNOHAND_COUNT), helpstring("Returns the number of cards in the hand")]
+    HRESULT Count([out, retval] long* plCount);
+    [propget, id(DISPID_VALUE), helpstring("Returns the card at the specified index")]
+    HRESULT Item([in] long lIndex, [out, retval] IUnoCard** ppCard);
+    [id(DISPID_UNOHAND_ADD), helpstring("Adds a card to the hand")]
+    HRESULT Add([in] IUnoCard* pCard);
+    [id(DISPID_UNOHAND_REMOVE), helpstring("Removes the card at the specified index")]
+    HRESULT Remove([in] long lIndex, [out, retval] IUnoCard** ppCard);
+    [id(DISPID_UNOHAND_CLEAR), helpstring("Removes all cards from the hand")]
+    HRESULT Clear();
+    [propget, id(DISPID_NEWENUM), helpstring("Returns the enumerator for the collection")]
+    HRESULT _NewEnum([out, retval] IUnknown** ppUnkEnum);
+};
+
+[
+    object,
+    uuid(38342573-8727-44EB-8C19-468B4E26AFFA),
+    dual,
+    helpstring("IUnoPlayer Interface"),
+    pointer_default(unique)
+]
+interface IUnoPlayer : IDispatch
+{
+    [propget, id(DISPID_UNOPLAYER_NAME), helpstring("Returns or sets the name of the player")]
+    HRESULT Name([out, retval] BSTR* pbstrName);
+    [propput, id(DISPID_UNOPLAYER_NAME), helpstring("Returns or sets the name of the player")]
+    HRESULT Name([in] BSTR bstrName);
+    [propget, id(DISPID_UNOPLAYER_TYPE), helpstring("Returns or sets the type of the player")]
+    HRESULT Type([out, retval] UnoPlayerType* peType);
+    [propput, id(DISPID_UNOPLAYER_TYPE), helpstring("Returns or sets the type of the player")]
+    HRESULT Type([in] UnoPlayerType eType);
+    [propget, id(DISPID_UNOPLAYER_HAND), helpstring("Returns the hand of the player")]
+    HRESULT Hand([out, retval] IUnoHand** ppHand);
+    [id(DISPID_UNOPLAYER_DRAW), helpstring("Draws a card for the player's turn")]
+    HRESULT Draw();
+    [id(DISPID_UNOPLAYER_PLAY), helpstring("Plays a card for the player's turn")]
+    HRESULT Play([in] long lIndex, [out, retval] VARIANT_BOOL* pbPlayed);
+    [id(DISPID_UNOPLAYER_PASS), helpstring("Passes on the player's turn")]
+    HRESULT Pass([out, retval] VARIANT_BOOL* pbPassed);
+};
+
+// forward declaration
+interface IUnoGameCmd;
+
+[
+    object,
+    uuid(F39552D5-D885-4aeb-A401-27C1CD05616F),
+    hidden,
+    helpstring("IUnoPlayerCmd Interface"),
+    pointer_default(unique)
+]
+interface IUnoPlayerCmd : IUnknown
+{
+    [helpstring("Initializes the player")]
+    HRESULT Initialize([in] IUnoGameCmd* pGameCmd);
+    [helpstring("Terminates the player")]
+    HRESULT Terminate();
+};
+
+[
+    object,
+    uuid(3A59ABF4-82DD-4587-B034-8226A780129D),
+    dual,
+    helpstring("IUnoPlayers Interface"),
+    pointer_default(unique)
+]
+interface IUnoPlayers : IDispatch
+{
+    [propget, id(DISPID_UNOPLAYERS_COUNT), helpstring("Returns the number of players in the game")]
+    HRESULT Count([out, retval] long* plCount);
+    [propget, id(DISPID_VALUE), helpstring("Returns the player at the specified index")]
+    HRESULT Item([in] long lIndex, [out, retval] IUnoPlayer** ppPlayer);
+    [id(DISPID_UNOPLAYERS_ADD), helpstring("Adds a player to the game")]
+    HRESULT Add([in] IUnoPlayer* pPlayer);
+    [id(DISPID_UNOPLAYERS_REMOVE), helpstring("Removes the player at the specified index")]
+    HRESULT Remove([in] long lIndex, [out, retval] IUnoPlayer** ppPlayer);
+    [id(DISPID_UNOPLAYERS_CLEAR), helpstring("Removes all players from the game")]
+    HRESULT Clear();
+    [propget, id(DISPID_NEWENUM), helpstring("Returns the enumerator for the collection")]
+    HRESULT _NewEnum([out, retval] IUnknown** ppUnkEnum);
+};
+
+[
+    object,
+    uuid(8E4B6F66-A9BA-463A-949D-F0EA7B952148),
+    dual,
+    helpstring("IUnoDeck Interface"),
+    pointer_default(unique)
+]
+interface IUnoDeck : IDispatch
+{
+    [propget, id(DISPID_UNODECK_DRAWCOUNT), helpstring("Returns the number of cards to be drawn")]
+    HRESULT DrawCount([out, retval] long* plDrawCount);
+    [propget, id(DISPID_UNODECK_PLAYEDCOUNT), helpstring("Returns the number of cards that have been played")]
+    HRESULT PlayedCount([out, retval] long* plPlayedCount);
+    [propget, id(DISPID_UNODECK_ACTIVECARD), helpstring("Returns the currently active card")]
+    HRESULT ActiveCard([out, retval] IUnoCard** ppActiveCard);
+    [id(DISPID_UNODECK_DRAW), helpstring("Draws a card")]
+    HRESULT Draw([out, retval] IUnoCard** ppCard);
+    [id(DISPID_UNODECK_PLAY), helpstring("Plays a card")]
+    HRESULT Play([in] IUnoCard* pCard);
+};
+
+[
+    object,
+    uuid(8AA84C28-AC63-4DCF-8FAD-8C0694C0361F),
+    dual,
+    helpstring("IUnoGame Interface"),
+    pointer_default(unique)
+]
+interface IUnoGame : IDispatch
+{
+    [propget, id(DISPID_UNOGAME_TITLE), helpstring("Returns or sets the title of the game")]
+    HRESULT Title([out, retval] BSTR* pbstrTitle);
+    [propput, id(DISPID_UNOGAME_TITLE), helpstring("Returns or sets the title of the game")]
+    HRESULT Title([in] BSTR bstrTitle);
+    [propget, id(DISPID_UNOGAME_PLAYERS), helpstring("Returns the players of the game")]
+    HRESULT Players([out, retval] IUnoPlayers** ppPlayers);
+    [propget, id(DISPID_UNOGAME_DECK), helpstring("Returns the deck of the game")]
+    HRESULT Deck([out, retval] IUnoDeck** ppDeck);
+    [propget, id(DISPID_UNOGAME_WILDCOLOR), helpstring("Returns or sets the color of the currently active Wild card")]
+    HRESULT WildColor([out, retval] UnoColor* peWildColor);
+    [propput, id(DISPID_UNOGAME_WILDCOLOR), helpstring("Returns or sets the color of the currently active Wild card")]
+    HRESULT WildColor([in] UnoColor eWildColor);
+    [id(DISPID_UNOGAME_CREATEPLAYER), helpstring("Creates and adds a player to the game")]
+    HRESULT CreatePlayer([in] BSTR bstrName, [in] UnoPlayerType eType, [out, retval] IUnoPlayer** ppPlayer);
+    [id(DISPID_UNOGAME_START), helpstring("Starts the game")]
+    HRESULT Start();
+    [id(DISPID_UNOGAME_STOP), helpstring("Stops the game")]
+    HRESULT Stop();
+    [id(DISPID_UNOGAME_ISCARDPLAYABLE), helpstring("Checks if a card is playable")]
+    HRESULT IsCardPlayable([in] IUnoCard* pCard, [out, retval] VARIANT_BOOL* pbIsCardPlayable);
+    [propget, id(DISPID_UNOGAME_HANDSIZE), helpstring("Returns or sets the number of cards dealt to a hand")]
+    HRESULT HandSize([out, retval] long* plHandSize);
+    [propput, id(DISPID_UNOGAME_HANDSIZE), helpstring("Returns or sets the number of cards dealt to a hand")]
+    HRESULT HandSize([in] long lHandSize);
+    [propget, id(DISPID_UNOGAME_PLAYAFTERDRAW), helpstring("Returns or sets whether a player can play after drawing")]
+    HRESULT PlayAfterDraw([out, retval] VARIANT_BOOL* pbPlayAfterDraw);
+    [propput, id(DISPID_UNOGAME_PLAYAFTERDRAW), helpstring("Returns or sets whether a player can play after drawing")]
+    HRESULT PlayAfterDraw([in] VARIANT_BOOL bPlayAfterDraw);
+};
+
+[
+    object,
+    uuid(A141AC69-1DC2-41ab-AD9A-D8A992BDB5DC),
+    hidden,
+    helpstring("IUnoGameCmd Interface"),
+    pointer_default(unique)
+]
+interface IUnoGameCmd : IUnknown
+{
+    [helpstring("Draws a card for the player's turn")]
+    HRESULT Draw([out, retval] IUnoCard** ppCard);
+    [helpstring("Plays a card for the player's turn")]
+    HRESULT Play([in] IUnoCard* pCard, [out, retval] VARIANT_BOOL* pbPlayed);
+    [helpstring("Passes on the player's turn")]
+    HRESULT Pass([out, retval] VARIANT_BOOL* pbPassed);
+    [helpstring("Finishes the player's turn")]
+    HRESULT TurnCompleted();
+};
+
+[
+    object,
+    uuid(A4D1FD39-50F0-418B-9922-B7FA39181007),
+    dual,
+    helpstring("IUnoEngine Interface"),
+    pointer_default(unique)
+]
+interface IUnoEngine : IDispatch
+{
+    [propget, id(DISPID_UNOENGINE_ACTIVEGAME), helpstring("Returns the currently active game")]
+    HRESULT ActiveGame([out, retval] IUnoGame** ppActiveGame);
+};
+
+[
+    uuid(94988F36-AEF2-4004-8B0E-7C0843177B57),
+    version(1.0),
+    helpstring("RogCorp QUno Engine 1.0 Type Library")
+]
+library QEngineLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [
+        uuid(F14F3FC7-F49C-428b-88ED-2B3A83B31558),
+        helpstring("IUnoGameEvents Interface"),
+    ]
+    dispinterface IUnoGameEvents
+    {
+        properties:
+        methods:
+        [id(DISPID_UNOGAMEEVENTS_PLAYERTURN), helpstring("Fired when a player takes their turn")]
+        void PlayerTurn([in] long lPlayer);
+        [id(DISPID_UNOGAMEEVENTS_PLAYERCHOOSEWILDCOLOR), helpstring("Fired when a player needs to choose a Wild card color")]
+        void PlayerChooseWildColor([in] long lPlayer, [in, out] UnoColor* peColor);
+        [id(DISPID_UNOGAMEEVENTS_PLAYERUNO), helpstring("Fired when a player reaches UNO")]
+        void PlayerUno([in] long lPlayer);
+        [id(DISPID_UNOGAMEEVENTS_PLAYEROUT), helpstring("Fired when a player is out of cards")]
+        void PlayerOut([in] long lPlayer, [in, out] VARIANT_BOOL* pbKeepPlaying);
+        [id(DISPID_UNOGAMEEVENTS_GAMEOVER), helpstring("Fired when the game is over")]
+        void GameOver();
+    };
+
+    [
+        uuid(8AB1463C-7F38-4B1A-86D9-E84E403EC2D6),
+        helpstring("RogCorp UnoCard Object")
+    ]
+    coclass UnoCard
+    {
+        [default] interface IUnoCard;
+    };
+
+    [
+        uuid(BE19A0C4-BE05-4601-988D-EE351B2910F1),
+        helpstring("RogCorp UnoHand Collection")
+    ]
+    coclass UnoHand
+    {
+        [default] interface IUnoHand;
+    };
+
+    [
+        uuid(14266EC4-B716-4E41-AD78-77EFC5868EFB),
+        helpstring("RogCorp UnoPlayer Object")
+    ]
+    coclass UnoPlayer
+    {
+        [default] interface IUnoPlayer;
+    };
+
+    [
+        uuid(54691592-17CB-4DED-A1C2-5B54214FD0E8),
+        helpstring("RogCorp UnoPlayers Collection")
+    ]
+    coclass UnoPlayers
+    {
+        [default] interface IUnoPlayers;
+    };
+
+    [
+        uuid(ECFD4994-D9FB-4A4A-86D7-99F48A1081F1),
+        helpstring("RogCorp UnoDeck Object")
+    ]
+    coclass UnoDeck
+    {
+        [default] interface IUnoDeck;
+    };
+
+    [
+        uuid(46AFD017-CEF0-47B5-B2F2-0477AE5D0C0C),
+        helpstring("RogCorp UnoGame Object")
+    ]
+    coclass UnoGame
+    {
+        [default] interface IUnoGame;
+        [default, source] dispinterface IUnoGameEvents;
+    };
+
+    [
+        uuid(601BC646-1D1E-4E3D-8A9B-8E01AF7AA847),
+        helpstring("RogCorp UnoEngine Object")
+    ]
+    coclass UnoEngine
+    {
+        [default] interface IUnoEngine;
+    };
+};

@@ -1,0 +1,26 @@
+HKCR
+{
+    QEngine.UnoDeck.1 = s 'RogCorp UnoDeck Object'
+    {
+        CLSID = s '{ECFD4994-D9FB-4A4A-86D7-99F48A1081F1}'
+    }
+    QEngine.UnoDeck = s 'RogCorp UnoDeck Object'
+    {
+        CLSID = s '{ECFD4994-D9FB-4A4A-86D7-99F48A1081F1}'
+        CurVer = s 'QEngine.UnoDeck.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {ECFD4994-D9FB-4A4A-86D7-99F48A1081F1} = s 'RogCorp UnoDeck Object'
+        {
+            ProgID = s 'QEngine.UnoDeck.1'
+            VersionIndependentProgID = s 'QEngine.UnoDeck'
+            ForceRemove 'Programmable'
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+            'TypeLib' = s '{94988F36-AEF2-4004-8B0E-7C0843177B57}'
+        }
+    }
+}

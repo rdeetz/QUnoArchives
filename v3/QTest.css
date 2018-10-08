@@ -1,0 +1,40 @@
+BODY, P, A, TD, LI {
+    font-family: 'Verdana', 'Arial', sans-serif;
+    font-size: 8pt;
+    color: black;
+}
+
+INPUT, BUTTON, SELECT, LABEL, TEXTAREA, OBJECT {
+    font-family: 'Tahoma', 'Arial', 'sans-serif';
+    font-size: 8pt;
+    color: black;
+}
+
+.testpage {
+    background-color: white;
+}
+
+.boldtext {
+    font-weight: bold;
+}
+
+.redtext {
+    color: red;
+}
+
+.bluetext {
+    color: blue;
+}
+
+.greentext {
+    color: green;
+}
+
+A.stdlink:hover {
+    color: red;
+}
+
+.stdbutton {
+    width: 7em;
+    margin: 0.25em;
+}

@@ -1,0 +1,15 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; QControl.def - module export definition file for the 
+;;                RogCorp QControls Library 1.0
+;;
+;; Copyright © 2000-2001 Roger Deetz
+;;
+
+LIBRARY      "QControl.dll"
+
+EXPORTS
+    DllCanUnloadNow     @1 PRIVATE
+    DllGetClassObject   @2 PRIVATE
+    DllRegisterServer   @3 PRIVATE
+    DllUnregisterServer @4 PRIVATE

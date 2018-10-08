@@ -1,0 +1,26 @@
+HKCR
+{
+    QEngine.UnoHand.1 = s 'RogCorp UnoHand Collection'
+    {
+        CLSID = s '{BE19A0C4-BE05-4601-988D-EE351B2910F1}'
+    }
+    QEngine.UnoHand = s 'RogCorp UnoHand Collection'
+    {
+        CLSID = s '{BE19A0C4-BE05-4601-988D-EE351B2910F1}'
+        CurVer = s 'QEngine.UnoHand.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {BE19A0C4-BE05-4601-988D-EE351B2910F1} = s 'RogCorp UnoHand Collection'
+        {
+            ProgID = s 'QEngine.UnoHand.1'
+            VersionIndependentProgID = s 'QEngine.UnoHand'
+            ForceRemove 'Programmable'
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+            'TypeLib' = s '{94988F36-AEF2-4004-8B0E-7C0843177B57}'
+        }
+    }
+}

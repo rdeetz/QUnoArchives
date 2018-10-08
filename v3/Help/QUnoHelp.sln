@@ -1,0 +1,13 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{2CA5CB9B-D322-11D0-AD8F-00C04FB6BE4C}") = "QUnoHelp", "QUnoHelp.vup", "{3C237B14-C009-4B36-B936-BB353FDBE8CB}"
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {3C237B14-C009-4B36-B936-BB353FDBE8CB}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {3C237B14-C009-4B36-B936-BB353FDBE8CB}
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

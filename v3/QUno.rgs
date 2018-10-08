@@ -1,0 +1,11 @@
+HKCR
+{
+    NoRemove AppID
+    {
+        {DF6A49E7-1447-486D-9047-90CCDE1CEC4A} = s 'RogCorp QUno'
+        'QUno.exe'
+        {
+            val AppID = s {DF6A49E7-1447-486D-9047-90CCDE1CEC4A}
+        }
+    }
+}

@@ -1,0 +1,26 @@
+HKCR
+{
+    QEngine.UnoPlayers.1 = s 'RogCorp UnoPlayers Collection'
+    {
+        CLSID = s '{54691592-17CB-4DED-A1C2-5B54214FD0E8}'
+    }
+    QEngine.UnoPlayers = s 'RogCorp UnoPlayers Collection'
+    {
+        CLSID = s '{54691592-17CB-4DED-A1C2-5B54214FD0E8}'
+        CurVer = s 'QEngine.UnoPlayers.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {54691592-17CB-4DED-A1C2-5B54214FD0E8} = s 'RogCorp UnoPlayers Collection'
+        {
+            ProgID = s 'QEngine.UnoPlayers.1'
+            VersionIndependentProgID = s 'QEngine.UnoPlayers'
+            ForceRemove 'Programmable'
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+            'TypeLib' = s '{94988F36-AEF2-4004-8B0E-7C0843177B57}'
+        }
+    }
+}

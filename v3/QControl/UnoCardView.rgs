@@ -1,0 +1,33 @@
+HKCR
+{
+    QControl.UnoCardView.1 = s 'RogCorp UnoCardView Control'
+    {
+        CLSID = s '{029B4FE1-EC0D-4975-9D23-9D97849D18F7}'
+    }
+    QControl.UnoCardView = s 'RogCorp UnoCardView Control'
+    {
+        CLSID = s '{029B4FE1-EC0D-4975-9D23-9D97849D18F7}'
+        CurVer = s 'QControl.UnoCardView.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {029B4FE1-EC0D-4975-9D23-9D97849D18F7} = s 'RogCorp UnoCardView Control'
+        {
+            ProgID = s 'QControl.UnoCardView.1'
+            VersionIndependentProgID = s 'QControl.UnoCardView'
+            ForceRemove 'Programmable'
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+            ForceRemove 'Control'
+            ForceRemove 'ToolboxBitmap32' = s '%MODULE%, 101'
+            'MiscStatus' = s '0'
+            {
+                '1' = s '131473'
+            }
+            'TypeLib' = s '{9F88C833-49F7-457A-9ABF-9EB3461B93BE}'
+            'Version' = s '1.0'
+        }
+    }
+}

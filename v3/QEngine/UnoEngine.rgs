@@ -1,0 +1,26 @@
+HKCR
+{
+    QEngine.UnoEngine.1 = s 'RogCorp UnoEngine Object'
+    {
+        CLSID = s '{601BC646-1D1E-4E3D-8A9B-8E01AF7AA847}'
+    }
+    QEngine.UnoEngine = s 'RogCorp UnoEngine Object'
+    {
+        CLSID = s '{601BC646-1D1E-4E3D-8A9B-8E01AF7AA847}'
+        CurVer = s 'QEngine.UnoEngine.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {601BC646-1D1E-4E3D-8A9B-8E01AF7AA847} = s 'RogCorp UnoEngine Object'
+        {
+            ProgID = s 'QEngine.UnoEngine.1'
+            VersionIndependentProgID = s 'QEngine.UnoEngine'
+            ForceRemove 'Programmable'
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+            'TypeLib' = s '{94988F36-AEF2-4004-8B0E-7C0843177B57}'
+        }
+    }
+}

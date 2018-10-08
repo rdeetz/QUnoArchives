@@ -1,0 +1,26 @@
+HKCR
+{
+    QEngine.UnoCard.1 = s 'RogCorp UnoCard Object'
+    {
+        CLSID = s '{8AB1463C-7F38-4B1A-86D9-E84E403EC2D6}'
+    }
+    QEngine.UnoCard = s 'RogCorp UnoCard Object'
+    {
+        CLSID = s '{8AB1463C-7F38-4B1A-86D9-E84E403EC2D6}'
+        CurVer = s 'QEngine.UnoCard.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {8AB1463C-7F38-4B1A-86D9-E84E403EC2D6} = s 'RogCorp UnoCard Object'
+        {
+            ProgID = s 'QEngine.UnoCard.1'
+            VersionIndependentProgID = s 'QEngine.UnoCard'
+            ForceRemove 'Programmable'
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+            'TypeLib' = s '{94988F36-AEF2-4004-8B0E-7C0843177B57}'
+        }
+    }
+}

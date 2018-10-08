@@ -1,0 +1,375 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""QUno.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,0,0,12
+ PRODUCTVERSION 3,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "The All-American classic card game comes to your computer better than ever!\0"
+            VALUE "CompanyName", "RogCorp\0"
+            VALUE "FileDescription", "RogCorp QUno\0"
+            VALUE "FileVersion", "3.00.0012\0"
+            VALUE "InternalName", "QUno\0"
+            VALUE "LegalCopyright", "Copyright © 1997-2001 Roger Deetz\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OLESelfRegister", "\0"
+            VALUE "OriginalFilename", "QUno.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "RogCorp QUno 3.0\0"
+            VALUE "ProductVersion", "3.0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_QUno                REGISTRY MOVEABLE PURE  "QUno.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_QUNO                ICON    DISCARDABLE     "res\\QUno.ico"
+IDI_QGAME               ICON    DISCARDABLE     "res\\QGame.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUT DIALOGEX 0, 0, 250, 161
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About RogCorp QUno"
+FONT 8, "Tahoma"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,193,139,50,15
+    ICON            IDI_QUNO,IDC_STATIC,5,7,21,20
+    LTEXT           "RogCorp QUno",IDC_PRODUCTNAME,30,7,120,8
+    LTEXT           "Version 3.0  (Build %s)",IDC_PRODUCTVERSION,30,15,120,8
+    LTEXT           "Copyright © 1997-2001 Roger Deetz",IDC_STATIC,30,30,130,
+                    8
+    CONTROL         "List1",IDC_COMPONENTS,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_NOCOLUMNHEADER,30,50,213,35,
+                    WS_EX_CLIENTEDGE
+    EDITTEXT        IDC_WARNING,30,95,213,40,ES_MULTILINE | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP
+END
+
+IDD_OPTIONS DIALOG DISCARDABLE  0, 0, 300, 170
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "Tahoma"
+BEGIN
+    LISTBOX         IDC_OPTIONSLIST,7,7,100,135,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Options",IDC_OPTIONSFRAME,118,7,175,135,WS_GROUP
+    LTEXT           "Initial &Hand Size:",IDC_STATIC,135,25,55,8
+    EDITTEXT        IDC_HANDSIZEEDIT,198,25,35,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_HANDSIZESPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS | UDS_NOTHOUSANDS,234,24,10,15
+    CONTROL         "Allow &Playing After Drawing",IDC_PLAYAFTERDRAW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,135,48,120,8
+    DEFPUSHBUTTON   "OK",IDOK,187,148,50,15
+    PUSHBUTTON      "Cancel",IDCANCEL,243,148,50,15
+END
+
+IDD_EXCEPTION DIALOG DISCARDABLE  0, 0, 250, 110
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "RogCorp QUno Error"
+FONT 8, "Tahoma"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,193,88,50,15
+    ICON            IDI_QUNO,IDC_STATIC,5,5,20,20
+    LTEXT           "I'm sorry, QUno needs to shutdown.\nPlease relaunch QUno to start a new game.",
+                    IDC_STATIC,30,5,213,16
+    LTEXT           "If you continue to have problems running QUno, try reinstalling QUno from the RogCorp website, and send an e-mail to RogCorp describing the problem.",
+                    IDC_STATIC,30,35,213,32
+    LTEXT           "I apologize for the inconvenience.",IDC_STATIC,30,75,
+                    213,8
+END
+
+IDD_QUICKHINT DIALOG DISCARDABLE  0, 0, 250, 150
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Quick Hint"
+FONT 8, "Tahoma"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,193,128,50,15
+    CONTROL         "&Show Quick Hints at startup",IDC_SHOWQUICKHINTS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,135,115,8
+    PUSHBUTTON      "&Next >",IDC_NEXTHINT,137,128,50,15
+    CONTROL         403,IDC_STATIC,"Static",SS_BITMAP | SS_SUNKEN,7,7,23,21
+    LTEXT           "Some witty and informative Quick Hint text goes here!",
+                    IDC_HINTTEXT,35,7,208,110
+END
+
+IDD_WILDCOLOR DIALOG DISCARDABLE  0, 0, 204, 76
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Wild Card Color"
+FONT 8, "Tahoma"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,147,7,50,15
+    PUSHBUTTON      "Cancel",IDCANCEL,147,26,50,15
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 154
+    END
+
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 293
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 163
+    END
+
+    IDD_EXCEPTION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 103
+    END
+
+    IDD_QUICKHINT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_WILDCOLOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 197
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 69
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU DISCARDABLE 
+BEGIN
+    POPUP "&Game"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                IDM_GAME_NEW
+        MENUITEM "&Open...\tCtrl+O",            IDM_GAME_OPEN
+        MENUITEM "&Save\tCtrl+S",               IDM_GAME_SAVE
+        MENUITEM "Save &As...",                 IDM_GAME_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_GAME_EXIT
+    END
+    POPUP "&Play"
+    BEGIN
+        MENUITEM "&Play\tF2",                   IDM_PLAY_PLAY
+        MENUITEM "&Draw\tF3",                   IDM_PLAY_DRAW
+        MENUITEM "P&ass\tF4",                   IDM_PLAY_PASS
+        MENUITEM SEPARATOR
+        MENUITEM "&Force Computer to Play\tF5", IDM_PLAY_FORCE
+    END
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "&Options...",                 IDM_TOOLS_OPTIONS
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Contents\tF1",               IDM_HELP_CONTENTS
+        MENUITEM "&Quick Hint\tCtrl+Q",         IDM_HELP_QUICKHINT
+        MENUITEM "&RogCorp on the Web",         IDM_HELP_WEB
+        MENUITEM SEPARATOR
+        MENUITEM "&About RogCorp QUno",         IDM_HELP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDA_QUNO ACCELERATORS DISCARDABLE 
+BEGIN
+    "N",            IDM_GAME_NEW,           VIRTKEY, CONTROL, NOINVERT
+    "O",            IDM_GAME_OPEN,          VIRTKEY, CONTROL, NOINVERT
+    "Q",            IDM_HELP_QUICKHINT,     VIRTKEY, CONTROL, NOINVERT
+    "S",            IDM_GAME_SAVE,          VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          IDM_HELP_CONTENTS,      VIRTKEY, NOINVERT
+    VK_F2,          IDM_PLAY_PLAY,          VIRTKEY, NOINVERT
+    VK_F3,          IDM_PLAY_DRAW,          VIRTKEY, NOINVERT
+    VK_F4,          IDM_PLAY_PASS,          VIRTKEY, NOINVERT
+    VK_F5,          IDM_PLAY_FORCE,         VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_QUICKHINT           BITMAP  DISCARDABLE     "res\\QuickHint.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROJNAME            "QUno"
+    IDS_WARNING             "Warning: This computer program is protected by copyright law and international treaties. Unauthorized reproduction or distribution of this program, or any portion of it, may result in severe criminal and civil penalties, and will be prosecuted to the maximum extent possible under the law."
+    IDS_MAINFRAMETITLE      "RogCorp QUno"
+    IDS_DEFAULTGAME         "Game"
+    IDS_GAMEFILTER          "RogCorp QUno Games (*.uno)"
+    IDS_ERROR_NOWEB         "RogCorp QUno could not find the RogCorp website.\nPlease make sure that you are connected to the Intenet, then try again."
+    IDS_ERROR_NOHELP        "RogCorp QUno could not open the Help contents.\nPlease run Setup again to make sure the Help files have been installed."
+    IDS_DEFAULTPLAYER       "Player"
+    IDS_DEFAULTCOMPUTER     "Computer"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_QUICKHINT_1         "First"
+    IDS_QUICKHINT_2         "Second"
+    IDS_QUICKHINT_3         "Third"
+    IDS_QUICKHINT_4         "Fourth"
+    IDS_QUICKHINT_5         "Fifth"
+    IDS_QUICKHINT_6         "Sixth"
+    IDS_QUICKHINT_7         "Seventh"
+    IDS_QUICKHINT_8         "Eighth"
+    IDS_QUICKHINT_9         "Ninth"
+    IDS_QUICKHINT_10        "Tenth"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_GAME_NEW            "Starts a new game"
+    IDM_GAME_OPEN           "Opens a previously saved game"
+    IDM_GAME_SAVE           "Saves the current game"
+    IDM_GAME_SAVEAS         "Saves the current game with a different name"
+    IDM_GAME_EXIT           "Exits the program"
+    IDM_PLAY_PLAY           "Plays the selected card"
+    IDM_PLAY_DRAW           "Draws a card"
+    IDM_PLAY_PASS           "Passes the turn"
+    IDM_PLAY_FORCE          "Forces the computer to play"
+    IDM_TOOLS_OPTIONS       "Changes program options"
+    IDM_HELP_CONTENTS       "Opens the online help"
+    IDM_HELP_QUICKHINT      "Displays a Quick Hint"
+    IDM_HELP_WEB            "Opens the RogCorp website"
+    IDM_HELP_ABOUT          "Displays program version and copyright information"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "QUno.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

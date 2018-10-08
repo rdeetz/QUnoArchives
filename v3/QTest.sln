@@ -1,0 +1,13 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{2CA5CB9B-D322-11D0-AD8F-00C04FB6BE4C}") = "QTest", "QTest.vup", "{3F4F4188-E0CD-4B73-BABE-6859E155BD48}"
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {3F4F4188-E0CD-4B73-BABE-6859E155BD48}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {3F4F4188-E0CD-4B73-BABE-6859E155BD48}
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal
